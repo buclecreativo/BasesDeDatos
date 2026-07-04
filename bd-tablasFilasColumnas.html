@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bucle Creativo | El lenguaje secreto de los datos</title>
+<style>
+  :root{
+    --azul-oscuro:#0f2744;
+    --azul-profundo:#1e3a5f;
+    --azul-medio:#2c5282;
+    --naranja:#ff6b35;
+    --naranja-suave:#ff8c5a;
+    --blanco:#ffffff;
+    --gris-claro:#f4f6f9;
+    --gris:#6c757d;
+    --gris-texto:#333;
+    --sombra:0 10px 30px rgba(15,39,68,0.12);
+    --sombra-fuerte:0 20px 50px rgba(15,39,68,0.2);
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+
+  body{
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background:linear-gradient(135deg,#e8eef5 0%,#f4f6f9 100%);
+    color:var(--gris-texto);
+    line-height:1.7;
+    min-height:100vh;
+  }
+
+  .contenedor{
+    max-width:1100px;
+    margin:30px auto;
+    background:var(--blanco);
+    border-radius:24px;
+    box-shadow:var(--sombra-fuerte);
+    overflow:hidden;
+  }
+
+  /* HEADER */
+  header{
+    background:linear-gradient(135deg,var(--azul-oscuro) 0%,var(--azul-profundo) 60%,var(--azul-medio) 100%);
+    color:var(--blanco);
+    padding:60px 40px 80px;
+    position:relative;
+    overflow:hidden;
+    text-align:center;
+  }
+
+  header::before{
+    content:"";
+    position:absolute;
+    top:-50%;right:-10%;
+    width:500px;height:500px;
+    background:radial-gradient(circle,rgba(255,107,53,0.25) 0%,transparent 70%);
+    border-radius:50%;
+  }
+
+  header::after{
+    content:"";
+    position:absolute;
+    bottom:-40%;left:-10%;
+    width:400px;height:400px;
+    background:radial-gradient(circle,rgba(255,255,255,0.08) 0%,transparent 70%);
+    border-radius:50%;
+  }
+
+  .titulo-principal{
+    font-size:clamp(2.5rem,6vw,4.5rem);
+    font-weight:800;
+    letter-spacing:-1px;
+    margin-bottom:15px;
+    position:relative;
+    z-index:2;
+    text-shadow:0 4px 20px rgba(0,0,0,0.3);
+  }
+
+  .titulo-principal span{
+    color:var(--naranja);
+    display:inline-block;
+    animation:flotar 3s ease-in-out infinite;
+  }
+
+  @keyframes flotar{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-8px);}
+  }
+
+  .subtitulo{
+    font-size:clamp(1.1rem,2.5vw,1.6rem);
+    font-weight:300;
+    opacity:0.95;
+    position:relative;
+    z-index:2;
+    max-width:800px;
+    margin:0 auto;
+  }
+
+  .badge-capitulo{
+    display:inline-block;
+    background:var(--naranja);
+    color:var(--blanco);
+    padding:8px 20px;
+    border-radius:50px;
+    font-size:0.9rem;
+    font-weight:600;
+    letter-spacing:1px;
+    margin-bottom:20px;
+    position:relative;
+    z-index:2;
+    box-shadow:0 4px 15px rgba(255,107,53,0.4);
+  }
+
+  /* SECCIONES */
+  section{
+    padding:50px 40px;
+    border-bottom:1px solid #eef2f7;
+  }
+
+  section:last-of-type{border-bottom:none;}
+
+  .seccion-titulo{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    font-size:1.8rem;
+    color:var(--azul-oscuro);
+    margin-bottom:25px;
+    font-weight:700;
+  }
+
+  .seccion-titulo .icono{
+    width:50px;height:50px;
+    background:linear-gradient(135deg,var(--naranja),var(--naranja-suave));
+    border-radius:14px;
+    display:flex;align-items:center;justify-content:center;
+    font-size:1.6rem;
+    box-shadow:0 6px 15px rgba(255,107,53,0.3);
+    color:white;
+  }
+
+  p{margin-bottom:15px;font-size:1.05rem;}
+
+  /* OBJETIVO */
+  .objetivo-box{
+    background:linear-gradient(135deg,#fff7f0 0%,#ffe8d9 100%);
+    border-left:5px solid var(--naranja);
+    padding:25px 30px;
+    border-radius:12px;
+    font-size:1.1rem;
+    font-style:italic;
+    color:var(--azul-oscuro);
+    box-shadow:var(--sombra);
+  }
+
+  /* ACTIVACIÓN */
+  .activacion{
+    background:linear-gradient(135deg,var(--azul-oscuro) 0%,var(--azul-profundo) 100%);
+    color:var(--blanco);
+    border-radius:18px;
+    padding:40px;
+    margin:20px 0;
+    position:relative;
+    overflow:hidden;
+  }
+
+  .activacion::before{
+    content:"💭";
+    position:absolute;
+    font-size:15rem;
+    opacity:0.05;
+    right:-20px;
+    top:-40px;
+  }
+
+  .activacion h3{
+    color:var(--naranja);
+    font-size:1.4rem;
+    margin-bottom:15px;
+  }
+
+  .activacion p{
+    color:rgba(255,255,255,0.95);
+    font-size:1.05rem;
+  }
+
+  /* DESARROLLO - CARDS */
+  .concepto-card{
+    background:var(--blanco);
+    border:1px solid #e1e8f0;
+    border-radius:16px;
+    padding:30px;
+    margin:25px 0;
+    box-shadow:var(--sombra);
+    transition:transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .concepto-card:hover{
+    transform:translateY(-5px);
+    box-shadow:var(--sombra-fuerte);
+    border-color:var(--naranja);
+  }
+
+  .concepto-card h3{
+    color:var(--azul-oscuro);
+    font-size:1.4rem;
+    margin-bottom:15px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+
+  .concepto-card h3 .emoji{font-size:1.8rem;}
+
+  .imagen-concepto{
+    width:100%;
+    max-height:280px;
+    object-fit:cover;
+    border-radius:12px;
+    margin:15px 0;
+    box-shadow:var(--sombra);
+  }
+
+  /* TABLA EJEMPLO */
+  .tabla-ejemplo{
+    width:100%;
+    border-collapse:collapse;
+    margin:20px 0;
+    border-radius:12px;
+    overflow:hidden;
+    box-shadow:var(--sombra);
+    font-size:0.95rem;
+  }
+
+  .tabla-ejemplo thead{
+    background:linear-gradient(135deg,var(--azul-oscuro),var(--azul-profundo));
+    color:var(--blanco);
+  }
+
+  .tabla-ejemplo th,.tabla-ejemplo td{
+    padding:12px 15px;
+    text-align:left;
+    border-bottom:1px solid #e1e8f0;
+  }
+
+  .tabla-ejemplo tbody tr:nth-child(even){background:#f8fafc;}
+  .tabla-ejemplo tbody tr:hover{background:#fff0e6;}
+
+  /* CAJA TIP */
+  .tip-box{
+    background:linear-gradient(135deg,#e3f2fd,#bbdefb);
+    border-left:5px solid var(--azul-medio);
+    padding:20px 25px;
+    border-radius:12px;
+    margin:20px 0;
+  }
+
+  .tip-box strong{color:var(--azul-oscuro);}
+
+  .warning-box{
+    background:linear-gradient(135deg,#fff3e0,#ffe0b2);
+    border-left:5px solid var(--naranja);
+    padding:20px 25px;
+    border-radius:12px;
+    margin:20px 0;
+  }
+
+  /* RETO */
+  .reto-box{
+    background:linear-gradient(135deg,var(--naranja) 0%,#ff8c5a 100%);
+    color:var(--blanco);
+    padding:40px;
+    border-radius:18px;
+    margin:20px 0;
+    position:relative;
+    overflow:hidden;
+    box-shadow:0 15px 35px rgba(255,107,53,0.3);
+  }
+
+  .reto-box::before{
+    content:"🚀";
+    position:absolute;
+    font-size:12rem;
+    opacity:0.15;
+    right:-20px;
+    bottom:-40px;
+  }
+
+  .reto-box h3{
+    font-size:1.8rem;
+    margin-bottom:15px;
+  }
+
+  .reto-box ol{
+    list-style:none;
+    counter-reset:reto;
+    position:relative;
+    z-index:2;
+  }
+
+  .reto-box ol li{
+    counter-increment:reto;
+    padding:12px 0 12px 50px;
+    position:relative;
+    font-size:1.05rem;
+  }
+
+  .reto-box ol li::before{
+    content:counter(reto);
+    position:absolute;
+    left:0;top:10px;
+    width:35px;height:35px;
+    background:var(--blanco);
+    color:var(--naranja);
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-weight:800;
+    box-shadow:0 4px 10px rgba(0,0,0,0.2);
+  }
+
+  /* QUIZ */
+  .quiz-container{
+    background:linear-gradient(135deg,#f8fafc,#e8eef5);
+    border-radius:18px;
+    padding:40px;
+    box-shadow:var(--sombra);
+  }
+
+  .quiz-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
+    flex-wrap:wrap;
+    gap:15px;
+  }
+
+  .progreso{
+    background:#e1e8f0;
+    height:10px;
+    border-radius:10px;
+    overflow:hidden;
+    flex:1;
+    min-width:200px;
+  }
+
+  .progreso-barra{
+    background:linear-gradient(90deg,var(--naranja),var(--naranja-suave));
+    height:100%;
+    width:20%;
+    transition:width 0.5s ease;
+    border-radius:10px;
+  }
+
+  .puntaje{
+    background:var(--azul-oscuro);
+    color:var(--blanco);
+    padding:8px 18px;
+    border-radius:50px;
+    font-weight:600;
+    font-size:0.95rem;
+  }
+
+  .pregunta{
+    background:var(--blanco);
+    padding:30px;
+    border-radius:14px;
+    box-shadow:var(--sombra);
+    margin-bottom:20px;
+  }
+
+  .pregunta-numero{
+    color:var(--naranja);
+    font-weight:700;
+    font-size:0.9rem;
+    letter-spacing:1px;
+    margin-bottom:8px;
+  }
+
+  .pregunta-texto{
+    font-size:1.2rem;
+    color:var(--azul-oscuro);
+    font-weight:600;
+    margin-bottom:20px;
+  }
+
+  .opciones{display:flex;flex-direction:column;gap:12px;}
+
+  .opcion{
+    background:var(--blanco);
+    border:2px solid #e1e8f0;
+    padding:15px 20px;
+    border-radius:12px;
+    cursor:pointer;
+    transition:all 0.3s ease;
+    font-size:1rem;
+    text-align:left;
+    display:flex;
+    align-items:center;
+    gap:12px;
+  }
+
+  .opcion:hover:not(.deshabilitada){
+    border-color:var(--naranja);
+    background:#fff7f0;
+    transform:translateX(5px);
+  }
+
+  .opcion .letra{
+    width:32px;height:32px;
+    background:var(--azul-oscuro);
+    color:var(--blanco);
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-weight:700;
+    flex-shrink:0;
+  }
+
+  .opcion.correcta{
+    background:#d4edda;
+    border-color:#28a745;
+    color:#155724;
+  }
+
+  .opcion.correcta .letra{background:#28a745;}
+
+  .opcion.incorrecta{
+    background:#f8d7da;
+    border-color:#dc3545;
+    color:#721c24;
+  }
+
+  .opcion.incorrecta .letra{background:#dc3545;}
+
+  .opcion.deshabilitada{cursor:not-allowed;opacity:0.7;}
+
+  .feedback{
+    margin-top:20px;
+    padding:18px 22px;
+    border-radius:12px;
+    font-weight:500;
+    display:none;
+    animation:aparecer 0.4s ease;
+  }
+
+  @keyframes aparecer{
+    from{opacity:0;transform:translateY(-10px);}
+    to{opacity:1;transform:translateY(0);}
+  }
+
+  .feedback.correcto{
+    background:linear-gradient(135deg,#d4edda,#c3e6cb);
+    color:#155724;
+    border-left:5px solid #28a745;
+  }
+
+  .feedback.incorrecto{
+    background:linear-gradient(135deg,#f8d7da,#f5c6cb);
+    color:#721c24;
+    border-left:5px solid #dc3545;
+  }
+
+  .btn-siguiente{
+    background:linear-gradient(135deg,var(--azul-oscuro),var(--azul-profundo));
+    color:var(--blanco);
+    border:none;
+    padding:14px 30px;
+    border-radius:50px;
+    font-size:1rem;
+    font-weight:600;
+    cursor:pointer;
+    margin-top:20px;
+    transition:all 0.3s ease;
+    box-shadow:0 6px 15px rgba(15,39,68,0.3);
+    display:none;
+  }
+
+  .btn-siguiente:hover{
+    transform:translateY(-3px);
+    box-shadow:0 10px 25px rgba(15,39,68,0.4);
+  }
+
+  .btn-siguiente.visible{display:inline-block;}
+
+  /* RESULTADO FINAL */
+  .resultado-final{
+    text-align:center;
+    padding:40px 20px;
+    display:none;
+  }
+
+  .resultado-final.visible{display:block;}
+
+  .resultado-final .emoji-grande{
+    font-size:5rem;
+    margin-bottom:20px;
+    animation:rebotar 1s ease infinite;
+  }
+
+  @keyframes rebotar{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-15px);}
+  }
+
+  .resultado-final h3{
+    color:var(--azul-oscuro);
+    font-size:2rem;
+    margin-bottom:15px;
+  }
+
+  .resultado-final .puntaje-final{
+    font-size:3rem;
+    font-weight:800;
+    color:var(--naranja);
+    margin:20px 0;
+  }
+
+  .btn-reiniciar{
+    background:linear-gradient(135deg,var(--naranja),var(--naranja-suave));
+    color:var(--blanco);
+    border:none;
+    padding:14px 35px;
+    border-radius:50px;
+    font-size:1.05rem;
+    font-weight:600;
+    cursor:pointer;
+    margin-top:20px;
+    box-shadow:0 6px 20px rgba(255,107,53,0.4);
+    transition:all 0.3s ease;
+  }
+
+  .btn-reiniciar:hover{transform:translateY(-3px);}
+
+  /* FOOTER */
+  footer{
+    background:linear-gradient(135deg,var(--azul-oscuro),var(--azul-profundo));
+    color:var(--blanco);
+    padding:35px 20px;
+    text-align:center;
+  }
+
+  footer p{margin:5px 0;font-size:0.95rem;}
+  footer .firma{color:var(--naranja);font-weight:600;}
+
+  /* RESPONSIVE */
+  @media(max-width:768px){
+    .contenedor{margin:10px;border-radius:16px;}
+    header{padding:40px 20px 60px;}
+    section{padding:35px 20px;}
+    .activacion,.reto-box,.quiz-container{padding:25px 20px;}
+    .tabla-ejemplo{font-size:0.85rem;}
+    .tabla-ejemplo th,.tabla-ejemplo td{padding:8px 10px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="contenedor">
+
+  <!-- HEADER -->
+  <header>
+    <div class="badge-capitulo">CAPÍTULO 2 · BASES DE DATOS</div>
+    <h1 class="titulo-principal">Bucle <span>creativo</span></h1>
+    <p class="subtitulo">El lenguaje secreto de los datos: descubre cómo las máquinas aprenden a organizar el mundo</p>
+  </header>
+
+  <!-- OBJETIVO -->
+  <section>
+    <h2 class="seccion-titulo"><span class="icono">🎯</span> Objetivo de aprendizaje</h2>
+    <div class="objetivo-box">
+      <strong>Comprender</strong> los fundamentos del modelado de datos mediante la identificación de tablas, filas y columnas, y la correcta aplicación de los tipos de datos en PostgreSQL, diseñando en papel un esquema lógico coherente para un caso real, con el fin de desarrollar el pensamiento estructural, la capacidad de abstracción y una actitud ética frente a la organización de la información, reconociendo que detrás de cada dato hay una persona, una decisión y una historia que merece ser tratada con rigor y respeto.
+    </div>
+  </section>
+
+  <!-- ACTIVACIÓN -->
+  <section>
+    <h2 class="seccion-titulo"><span class="icono">💡</span> Activación: tu primer encuentro con el caos</h2>
+    <div class="activacion">
+      <h3>Imagina esto...</h3>
+      <p>Es sábado por la tarde. Estás en tu casa, revisando tu celular, y de pronto te llega un mensaje de tu mejor amigo: <em>"Oye, ¿me pasas el número de María? La del grupo de WhatsApp."</em> Abres tu agenda… y te das cuenta de que tienes a María guardada tres veces: una con su número viejo, otra con un apodo raro, y la tercera sin apellido. ¿Cuál le pasas?</p>
+      <p>Ahora piensa en algo más grande. Imagina que tus papás tienen una tienda de jeans aquí en Ecuador. Llevan años vendiendo, y toda la información —clientes, pedidos, productos, direcciones— está dispersa en cuadernos, hojas de Excel y hasta en servilletas. Un día, un cliente pregunta: <em>"¿Cuántos jeans azules talla 32 me vendieron el mes pasado?"</em> Y nadie sabe responder.</p>
+      <p>¿Te suena familiar? Ese caos que sientes en el pecho cuando la información está desordenada… <strong>eso es exactamente lo que una base de datos viene a resolver.</strong></p>
+      <p>Hoy no vas a aprender a programar. Hoy vas a aprender a <strong>pensar como un arquitecto de datos</strong>. Vas a descubrir el lenguaje secreto que usan las máquinas para recordar, organizar y contar historias con números. Y lo más hermoso: ya sabes hacerlo. Solo que todavía no lo sabes.</p>
+    </div>
+  </section>
+
+  <!-- DESARROLLO -->
+  <section>
+    <h2 class="seccion-titulo"><span class="icono">📚</span> Desarrollo: los tres pilares del lenguaje</h2>
+
+    <p>Antes de escribir una sola línea de código, necesitas entender tres conceptos que usarás toda tu vida: <strong>tablas, filas y columnas</strong>. No son fórmulas matemáticas. Son formas de organizar el mundo real. Y si sabes ordenar tu cuarto (aunque sea un poco), ya tienes la mitad del camino recorrido.</p>
+
+    <!-- TABLAS -->
+    <div class="concepto-card">
+      <h3><span class="emoji">🗄️</span> 1. Las tablas: los estantes de la bodega</h3>
+      <img class="imagen-concepto" src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=900&h=400&fit=crop" alt="Estantes ordenados de una bodega">
+      <p>Imagina la bodega de <strong>"Denim Ecuador"</strong>, una tienda de jeans imaginaria que vamos a acompañar durante este libro. Al principio, María y Andrés tiraban todos los jeans en una caja gigante. Encontrar algo era un caos. Entonces decidieron poner <strong>estantes con letreros</strong>:</p>
+      <ul style="margin:15px 0 15px 25px;">
+        <li>Un estante para los <strong>clientes</strong>.</li>
+        <li>Un estante para los <strong>modelos de jeans</strong>.</li>
+        <li>Un estante para los <strong>pedidos</strong>.</li>
+        <li>Un estante para los <strong>detalles de cada pedido</strong>.</li>
+      </ul>
+      <p>En el mundo de las bases de datos, esos estantes se llaman <strong>tablas</strong>. Cada tabla guarda información sobre <em>un solo tipo de cosa</em>.</p>
+
+      <table class="tabla-ejemplo">
+        <thead>
+          <tr><th>Tabla</th><th>¿Qué guarda?</th><th>Ejemplo</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Clientes</strong></td><td>Personas que compran</td><td>Juan Pérez, cédula 1712345678</td></tr>
+          <tr><td><strong>Jeans</strong></td><td>Catálogo de productos</td><td>Jean Skinny, código JN001, $45</td></tr>
+          <tr><td><strong>Pedidos</strong></td><td>Ventas realizadas</td><td>Pedido #1001, 15/03/2026</td></tr>
+          <tr><td><strong>Detalle_Pedidos</strong></td><td>Jeans por cada pedido</td><td>1 Skinny azul talla 32</td></tr>
+        </tbody>
+      </table>
+
+      <div class="tip-box">
+        <strong>💎 Regla de oro:</strong> cada tabla debe representar <em>una sola cosa</em>. Si para describirla necesitas usar la palabra "y" (ej: "clientes <em>y</em> pedidos"), necesitas separarla en dos tablas.
+      </div>
+    </div>
+
+    <!-- FILAS Y COLUMNAS -->
+    <div class="concepto-card">
+      <h3><span class="emoji">📊</span> 2. Filas y columnas: el jean específico y sus características</h3>
+      <img class="imagen-concepto" src="https://images.unsplash.com/photo-1542272604-787c3835535d?w=900&h=400&fit=crop" alt="Jeans organizados por tipo y color">
+      <p>Cada tabla tiene dos dimensiones:</p>
+      <ul style="margin:15px 0 15px 25px;">
+        <li><strong>Columnas (verticales):</strong> definen <em>qué tipo de información</em> guarda la tabla. Son los atributos: código, modelo, talla, color, precio, stock.</li>
+        <li><strong>Filas (horizontales):</strong> representan <em>cada registro específico</em>. Cada fila es un jean concreto con todos sus datos.</li>
+      </ul>
+
+      <table class="tabla-ejemplo">
+        <thead>
+          <tr><th>codigo</th><th>modelo</th><th>talla</th><th>color</th><th>precio</th><th>stock</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>JN001</td><td>Skinny</td><td>32</td><td>Azul</td><td>45.00</td><td>25</td></tr>
+          <tr><td>JN002</td><td>Recto</td><td>28</td><td>Negro</td><td>40.00</td><td>18</td></tr>
+          <tr><td>JN003</td><td>Slim</td><td>34</td><td>Gris</td><td>42.00</td><td>12</td></tr>
+          <tr><td>JN004</td><td>Bootcut</td><td>36</td><td>Azul</td><td>48.00</td><td>8</td></tr>
+          <tr><td>JN005</td><td>Skinny</td><td>30</td><td>Rojo</td><td>45.00</td><td>15</td></tr>
+        </tbody>
+      </table>
+
+      <div class="tip-box">
+        <strong>📌 Recuerda:</strong> las columnas también se llaman <em>campos</em> o <em>atributos</em>. Las filas también se llaman <em>registros</em> o <em>tuplas</em>. Son sinónimos; los vas a escuchar todos.
+      </div>
+    </div>
+
+    <!-- TIPOS DE DATOS -->
+    <div class="concepto-card">
+      <h3><span class="emoji">🔢</span> 3. Tipos de datos: por qué el sistema no deja sumar "colores"</h3>
+      <img class="imagen-concepto" src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=900&h=400&fit=crop" alt="Formulario con diferentes campos de datos">
+      <p>Imagina que llenas un formulario del banco. En la casilla de <em>cédula</em> solo van números; en la de <em>nombre</em>, solo letras. Si escribes "Azul" en la casilla de la cédula, el banco te dice: <strong>"Error. Aquí solo van números"</strong>.</p>
+      <p>Las bases de datos funcionan igual. Cada columna acepta <strong>solo un tipo de dato</strong>. Y eso no es una limitación: es una <em>protección</em>.</p>
+
+      <table class="tabla-ejemplo">
+        <thead>
+          <tr><th>Tipo</th><th>¿Para qué sirve?</th><th>Ejemplo válido</th><th>Ejemplo inválido</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>VARCHAR(n)</strong></td><td>Texto corto</td><td>"Juan Pérez"</td><td>12345</td></tr>
+          <tr><td><strong>TEXT</strong></td><td>Texto largo</td><td>"Jean premium..."</td><td>—</td></tr>
+          <tr><td><strong>INTEGER</strong></td><td>Números enteros</td><td>42, 100</td><td>3.14</td></tr>
+          <tr><td><strong>NUMERIC(p,s)</strong></td><td>Dinero, decimales exactos</td><td>45.00</td><td>"caro"</td></tr>
+          <tr><td><strong>DATE</strong></td><td>Fechas</td><td>2026-03-15</td><td>"ayer"</td></tr>
+          <tr><td><strong>TIMESTAMP</strong></td><td>Fecha y hora</td><td>2026-03-15 14:30</td><td>"hace dos horas"</td></tr>
+          <tr><td><strong>BOOLEAN</strong></td><td>Sí / No</td><td>TRUE, FALSE</td><td>"sí"</td></tr>
+        </tbody>
+      </table>
+
+      <div class="warning-box">
+        <strong>⚠️ Error común que debes evitar:</strong> guardar todo como texto pensando que "es más flexible". Si guardas una fecha como texto ("15 de marzo"), el sistema no podrá responder preguntas como <em>"¿cuántos pedidos tuve en marzo?"</em>. Usa siempre el tipo correcto: DATE para fechas, NUMERIC para dinero, VARCHAR para nombres.
+      </div>
+    </div>
+  </section>
+
+  <!-- RETO -->
+  <section>
+    <h2 class="seccion-titulo"><span class="icono">🚀</span> Reto: diseña tu propia bodega</h2>
+    <div class="reto-box">
+      <h3>Conviértete en arquitecto de datos</h3>
+      <p style="margin-bottom:20px;">Vas a diseñar en papel (o en un documento) las cuatro tablas principales de "Denim Ecuador": <strong>Clientes, Jeans, Pedidos y Detalle_Pedidos</strong>. No escribirás código todavía. Solo pensarás, decidirás y organizarás. Ese es el trabajo más difícil —y el más hermoso— de un diseñador de bases de datos.</p>
+      <ol>
+        <li><strong>Define las columnas</strong> de cada tabla: ¿qué información necesitas saber de cada cliente? ¿de cada jean? ¿de cada pedido?</li>
+        <li><strong>Asigna un tipo de dato</strong> a cada columna. Pregúntate: ¿es texto? ¿es número? ¿es fecha? ¿es dinero? ¿es sí/no?</li>
+        <li><strong>Verifica la regla de oro:</strong> ¿cada tabla representa una sola "cosa"? Si necesitas usar "y" para describirla, sepárala.</li>
+        <li><strong>Evita la redundancia:</strong> el nombre del cliente NO debe repetirse en la tabla Pedidos. Solo su <em>cliente_id</em>.</li>
+        <li><strong>Responde con tu diseño:</strong> ¿cuál es el teléfono de Juan Pérez? ¿cuántos jeans Skinny azules hay en bodega? ¿qué jeans compró Juan en su pedido #1001?</li>
+      </ol>
+      <p style="margin-top:25px;font-style:italic;opacity:0.95;">🎨 <strong>Pista creativa:</strong> usa colores distintos para cada tabla. Dibuja flechas entre las que se conectan. Tu diseño en papel es el primer boceto de algo que algún día podría servir a miles de personas.</p>
+    </div>
+  </section>
+
+  <!-- EVALUACIÓN LÚDICA -->
+  <section>
+    <h2 class="seccion-titulo"><span class="icono">🎮</span> Evaluación lúdica: pon a prueba lo aprendido</h2>
+
+    <div class="quiz-container">
+      <div class="quiz-header">
+        <div class="progreso"><div class="progreso-barra" id="barraProgreso"></div></div>
+        <div class="puntaje">⭐ Puntaje: <span id="puntaje">0</span>/5</div>
+      </div>
+
+      <div id="contenedorPregunta"></div>
+
+      <div class="feedback" id="feedback"></div>
+
+      <button class="btn-siguiente" id="btnSiguiente" onclick="siguientePregunta()">Siguiente pregunta ➜</button>
+
+      <div class="resultado-final" id="resultadoFinal">
+        <div class="emoji-grande" id="emojiFinal">🎉</div>
+        <h3 id="tituloFinal">¡Lo lograste!</h3>
+        <p id="mensajeFinal"></p>
+        <div class="puntaje-final" id="puntajeFinal"></div>
+        <button class="btn-reiniciar" onclick="reiniciarQuiz()">🔄 Intentar de nuevo</button>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>Taller diseñado con el corazón de un docente y la mente de un programador.</p>
+  <p class="firma">Diseñado por: Edwin Méndez J.</p>
+</footer>
+
+<script>
+  const preguntas = [
+    {
+      pregunta: "¿Qué es una tabla en una base de datos?",
+      opciones: [
+        "Una fórmula matemática para calcular totales",
+        "Una estructura que almacena información sobre un tipo específico de entidad",
+        "Un programa que ejecuta cál automáticamente",
+        "Una hoja de cálculo con celdas combinadas"
+      ],
+      correcta: 1,
+      explicacion: "¡Exacto! Una tabla es como un estante de la bodega: guarda información sobre un solo tipo de cosa (clientes, jeans, pedidos, etc.)."
+    },
+    {
+      pregunta: "En la tabla 'Jeans', el 'color' (Azul, Negro, Gris) representa una... ",
+      opciones: [
+        "Fila o registro",
+        "Base de datos completa",
+        "Columna o atributo",
+        "Consulta SQL"
+      ],
+      correcta: 2,
+      explicacion: "¡Muy bien! Las columnas (también llamadas campos o atributos) definen las características: color, talla, precio. Las filas son los jeans específicos."
+    },
+    {
+      pregunta: "¿Cuál es el tipo de dato MÁS adecuado para guardar el precio de un jean ($45.00)?",
+      opciones: [
+        "VARCHAR, porque es más flexible",
+        "TEXT, para que se vea bonito",
+        "NUMERIC(10,2), porque garantiza precisión con decimales",
+        "BOOLEAN, porque es verdadero o falso"
+      ],
+      correcta: 2,
+      explicacion: "¡Correcto! NUMERIC(10,2) permite hasta 10 dígitos con 2 decimales, ideal para dinero. Nunca uses REAL para valores monetarios."
+    },
+    {
+      pregunta: "¿Por qué NO debemos meter toda la información en una sola tabla gigante?",
+      opciones: [
+        "Porque las bases de datos no soportan muchas columnas",
+        "Para evitar redundancia, inconsistencia y errores al actualizar datos",
+        "Porque es más difícil de escribir en papel",
+        "Porque el sistema se pone lento automáticamente"
+      ],
+      correcta: 1,
+      explicacion: "¡Excelente! Si Juan Pérez cambia de teléfono y está repetido en 50 filas, tendrías que actualizar las 50. Separando en tablas, lo actualizas una sola vez."
+    },
+    {
+      pregunta: "Si necesitas registrar la fecha Y la hora exacta de un pedido, ¿qué tipo de dato usas?",
+      opciones: [
+        "DATE, porque incluye todo",
+        "TIME, porque es más preciso",
+        "VARCHAR, para escribirlo como texto",
+        "TIMESTAMP, porque combina fecha y hora"
+      ],
+      correcta: 3,
+      explicacion: "¡Perfecto! TIMESTAMP guarda fecha y hora juntas (ej: 2026-03-15 14:30:00). DATE solo guarda la fecha, TIME solo la hora."
+    }
+  ];
+
+  let preguntaActual = 0;
+  let puntaje = 0;
+  let respondida = false;
+
+  function mostrarPregunta(){
+    respondida = false;
+    const p = preguntas[preguntaActual];
+    const letras = ['A','B','C','D'];
+    let html = `
+      <div class="pregunta">
+        <div class="pregunta-numero">PREGUNTA ${preguntaActual+1} DE ${preguntas.length}</div>
+        <div class="pregunta-texto">${p.pregunta}</div>
+        <div class="opciones">
+    `;
+    p.opciones.forEach((op,i)=>{
+      html += `<button class="opcion" onclick="responder(${i})" id="opcion-${i}">
+        <span class="letra">${letras[i]}</span>
+        <span>${op}</span>
+      </button>`;
+    });
+    html += `</div></div>`;
+    document.getElementById('contenedorPregunta').innerHTML = html;
+    document.getElementById('feedback').style.display = 'none';
+    document.getElementById('feedback').className = 'feedback';
+    document.getElementById('btnSiguiente').classList.remove('visible');
+    document.getElementById('barraProgreso').style.width = ((preguntaActual+1)/preguntas.length*100)+'%';
+  }
+
+  function responder(indice){
+    if(respondida) return;
+    respondida = true;
+    const p = preguntas[preguntaActual];
+    const feedback = document.getElementById('feedback');
+
+    document.querySelectorAll('.opcion').forEach(o=>o.classList.add('deshabilitada'));
+
+    if(indice === p.correcta){
+      document.getElementById('opcion-'+indice).classList.add('correcta');
+      puntaje++;
+      document.getElementById('puntaje').textContent = puntaje;
+      feedback.className = 'feedback correcto';
+      feedback.innerHTML = `✅ <strong>¡Correcto!</strong> ${p.explicacion}`;
+    } else {
+      document.getElementById('opcion-'+indice).classList.add('incorrecta');
+      document.getElementById('opcion-'+p.correcta).classList.add('correcta');
+      feedback.className = 'feedback incorrecto';
+      feedback.innerHTML = `❌ <strong>No exactamente.</strong> La respuesta correcta era: <strong>"${p.opciones[p.correcta]}"</strong>. ${p.explicacion}`;
+    }
+    feedback.style.display = 'block';
+    document.getElementById('btnSiguiente').classList.add('visible');
+  }
+
+  function siguientePregunta(){
+    preguntaActual++;
+    if(preguntaActual < preguntas.length){
+      mostrarPregunta();
+    } else {
+      mostrarResultado();
+    }
+  }
+
+  function mostrarResultado(){
+    document.getElementById('contenedorPregunta').style.display = 'none';
+    document.getElementById('feedback').style.display = 'none';
+    document.getElementById('btnSiguiente').style.display = 'none';
+    document.querySelector('.quiz-header').style.display = 'none';
+
+    const final = document.getElementById('resultadoFinal');
+    final.classList.add('visible');
+    document.getElementById('puntajeFinal').textContent = `${puntaje} / ${preguntas.length}`;
+
+    let emoji, titulo, mensaje;
+    if(puntaje === 5){
+      emoji = '🏆';
+      titulo = '¡Eres un arquitecto de datos nato!';
+      mensaje = 'Dominaste el lenguaje secreto de los datos. Ya puedes diseñar tablas con los ojos cerrados. El siguiente paso: llevar este diseño al código en PostgreSQL. ¡El mundo de los datos te espera!';
+    } else if(puntaje >= 3){
+      emoji = '🌟';
+      titulo = '¡Muy buen trabajo!';
+      mensaje = 'Tienes una base sólida. Repasa los conceptos de tipos de datos y la regla de oro de las tablas, y estarás listo para el siguiente nivel. ¡Vas por excelente camino!';
+    } else {
+      emoji = '💪';
+      titulo = '¡Sigue adelante, tú puedes!';
+      mensaje = 'Aprender lleva tiempo, y cada intento te acerca más. Vuelve a leer la sección de desarrollo, observa las tablas de ejemplo, y vuelve a intentarlo. La constancia es el verdadero superpoder.';
+    }
+
+    document.getElementById('emojiFinal').textContent = emoji;
+    document.getElementById('tituloFinal').textContent = titulo;
+    document.getElementById('mensajeFinal').textContent = mensaje;
+  }
+
+  function reiniciarQuiz(){
+    preguntaActual = 0;
+    puntaje = 0;
+    document.getElementById('puntaje').textContent = 0;
+    document.getElementById('resultadoFinal').classList.remove('visible');
+    document.getElementById('contenedorPregunta').style.display = 'block';
+    document.querySelector('.quiz-header').style.display = 'flex';
+    mostrarPregunta();
+  }
+
+  // Iniciar
+  mostrarPregunta();
+</script>
+
+</body>
+</html>
