@@ -1,0 +1,1637 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Taller práctico sobre bases de datos: del caos del Excel al orden de PostgreSQL">
+    <meta name="author" content="Edwin Méndez J.">
+    <title>Bucle Creativo - ¿Por qué tu cuaderno y Excel ya no son suficientes?</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --azul-oscuro: #1e3a5f;
+            --azul-medio: #2c5282;
+            --azul-claro: #4299e1;
+            --naranja: #ed8936;
+            --naranja-oscuro: #dd6b20;
+            --gris-oscuro: #4a5568;
+            --gris-medio: #718096;
+            --gris-claro: #e2e8f0;
+            --blanco: #ffffff;
+            --sombra: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --sombra-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.7;
+            color: var(--gris-oscuro);
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--azul-oscuro) 0%, var(--azul-medio) 100%);
+            color: var(--blanco);
+            padding: 3rem 1rem 4rem;
+            text-align: center;
+            box-shadow: var(--sombra-lg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -5%;
+            width: 300px;
+            height: 300px;
+            background: rgba(237, 137, 54, 0.1);
+            border-radius: 50%;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .brand {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            animation: fadeInDown 1s ease;
+        }
+
+        .brand span {
+            color: var(--naranja);
+        }
+
+        .subtitle {
+            font-size: 1.8rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease 0.3s both;
+        }
+
+        .chapter-info {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease 0.6s both;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1100px;
+            margin: -2rem auto 3rem;
+            padding: 0 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--blanco);
+            border-radius: 15px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--sombra-lg);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: fadeIn 0.8s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 3px solid var(--gris-claro);
+        }
+
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--azul-oscuro), var(--azul-claro));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            color: var(--blanco);
+            font-size: 1.8rem;
+            flex-shrink: 0;
+        }
+
+        .card-title {
+            font-size: 1.8rem;
+            color: var(--azul-oscuro);
+            font-weight: 700;
+        }
+
+        /* Objective Section */
+        .objective-text {
+            font-size: 1.1rem;
+            text-align: justify;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border-left: 5px solid var(--naranja);
+            border-radius: 8px;
+            line-height: 1.9;
+        }
+
+        /* Activation Section */
+        .story-box {
+            background: linear-gradient(135deg, #fffaf0 0%, #feebc8 100%);
+            border-left: 5px solid var(--naranja);
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 1.5rem 0;
+            position: relative;
+        }
+
+        .story-box::before {
+            content: '"';
+            font-size: 5rem;
+            color: var(--naranja);
+            opacity: 0.3;
+            position: absolute;
+            top: -10px;
+            left: 10px;
+            font-family: serif;
+        }
+
+        .story-box p {
+            margin-bottom: 1rem;
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, var(--naranja) 0%, var(--naranja) 100%);
+            background-repeat: no-repeat;
+            background-size: 100% 0.4em;
+            background-position: 0 88%;
+            padding: 0 4px;
+            font-weight: 600;
+            color: var(--azul-oscuro);
+        }
+
+        /* Development Section */
+        .concept-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .concept-card {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border-radius: 12px;
+            padding: 2rem;
+            border-top: 4px solid var(--azul-claro);
+            transition: all 0.3s ease;
+        }
+
+        .concept-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--sombra-lg);
+        }
+
+        .concept-card h3 {
+            color: var(--azul-oscuro);
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .concept-card h3 i {
+            margin-right: 0.5rem;
+            color: var(--naranja);
+        }
+
+        /* Tables */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            background: var(--blanco);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--sombra);
+        }
+
+        .data-table thead {
+            background: linear-gradient(135deg, var(--azul-oscuro), var(--azul-medio));
+            color: var(--blanco);
+        }
+
+        .data-table th,
+        .data-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--gris-claro);
+        }
+
+        .data-table tbody tr:hover {
+            background: #f7fafc;
+        }
+
+        .data-table tbody tr:nth-child(even) {
+            background: #f8fafc;
+        }
+
+        /* Problem boxes */
+        .problem-list {
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+
+        .problem-list li {
+            padding: 1rem 1.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #fff5f5 0%, #fed7d7 100%);
+            border-left: 4px solid #e53e3e;
+            border-radius: 8px;
+            display: flex;
+            align-items: flex-start;
+            transition: transform 0.2s ease;
+        }
+
+        .problem-list li:hover {
+            transform: translateX(5px);
+        }
+
+        .problem-list li::before {
+            content: '⚠️';
+            margin-right: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .problem-list strong {
+            color: #c53030;
+            display: block;
+            margin-bottom: 0.3rem;
+        }
+
+        /* Challenge Section */
+        .challenge-box {
+            background: linear-gradient(135deg, var(--azul-oscuro) 0%, var(--azul-medio) 100%);
+            color: var(--blanco);
+            padding: 2.5rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .challenge-box::before {
+            content: '🎯';
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 4rem;
+            opacity: 0.2;
+        }
+
+        .challenge-box h3 {
+            font-size: 1.6rem;
+            margin-bottom: 1.5rem;
+            color: var(--naranja);
+        }
+
+        .challenge-box ol {
+            padding-left: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .challenge-box li {
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .challenge-box .hint {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-top: 2rem;
+            border-left: 4px solid var(--naranja);
+        }
+
+        /* Quiz Section */
+        .quiz-container {
+            background: linear-gradient(135deg, #f0fff4 0%, #c6f6d5 100%);
+            border-radius: 15px;
+            padding: 2.5rem;
+            margin: 2rem 0;
+        }
+
+        .quiz-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .quiz-header h3 {
+            color: var(--azul-oscuro);
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 12px;
+            background: var(--gris-claro);
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 1.5rem 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--naranja), var(--naranja-oscuro));
+            transition: width 0.5s ease;
+            width: 0%;
+        }
+
+        .question-container {
+            background: var(--blanco);
+            padding: 2rem;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--sombra);
+        }
+
+        .question-number {
+            display: inline-block;
+            background: var(--azul-oscuro);
+            color: var(--blanco);
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 35px;
+            margin-right: 0.8rem;
+            font-weight: 700;
+        }
+
+        .question-text {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--azul-oscuro);
+            margin-bottom: 1.5rem;
+            display: inline;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .option {
+            background: var(--blanco);
+            border: 2px solid var(--gris-claro);
+            padding: 1.2rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+
+        .option:hover {
+            border-color: var(--azul-claro);
+            background: #f0f9ff;
+            transform: translateX(5px);
+        }
+
+        .option.selected-correct {
+            background: #c6f6d5;
+            border-color: #48bb78;
+            color: #22543d;
+        }
+
+        .option.selected-incorrect {
+            background: #fed7d7;
+            border-color: #f56565;
+            color: #742a2a;
+        }
+
+        .option-letter {
+            background: var(--azul-medio);
+            color: var(--blanco);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .feedback {
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+            border-radius: 10px;
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .feedback.show {
+            display: block;
+        }
+
+        .feedback.correct {
+            background: #c6f6d5;
+            border-left: 5px solid #48bb78;
+            color: #22543d;
+        }
+
+        .feedback.incorrect {
+            background: #fed7d7;
+            border-left: 5px solid #f56565;
+            color: #742a2a;
+        }
+
+        .next-btn {
+            background: linear-gradient(135deg, var(--naranja), var(--naranja-oscuro));
+            color: var(--blanco);
+            border: none;
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 1.5rem;
+            display: none;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            box-shadow: var(--sombra);
+        }
+
+        .next-btn.show {
+            display: inline-block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .next-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(237, 137, 54, 0.4);
+        }
+
+        .score-display {
+            text-align: center;
+            padding: 2rem;
+            background: var(--blanco);
+            border-radius: 12px;
+            margin-top: 2rem;
+            display: none;
+            box-shadow: var(--sombra-lg);
+        }
+
+        .score-display.show {
+            display: block;
+            animation: fadeIn 0.8s ease;
+        }
+
+        .score-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--azul-oscuro), var(--azul-claro));
+            color: var(--blanco);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            box-shadow: var(--sombra-lg);
+        }
+
+        .score-number {
+            font-size: 3rem;
+            font-weight: 700;
+        }
+
+        .score-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .final-message {
+            font-size: 1.2rem;
+            color: var(--azul-oscuro);
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, var(--azul-oscuro) 0%, var(--azul-medio) 100%);
+            color: var(--blanco);
+            text-align: center;
+            padding: 3rem 1rem;
+            margin-top: 4rem;
+        }
+
+        .footer-text {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            opacity: 0.95;
+        }
+
+        .footer-author {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 600;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .brand {
+                font-size: 2.5rem;
+            }
+
+            .subtitle {
+                font-size: 1.3rem;
+            }
+
+            .card {
+                padding: 1.5rem;
+            }
+
+            .card-title {
+                font-size: 1.4rem;
+            }
+
+            .concept-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .data-table {
+                font-size: 0.9rem;
+            }
+
+            .data-table th,
+            .data-table td {
+                padding: 0.7rem;
+            }
+
+            .challenge-box {
+                padding: 1.5rem;
+            }
+        }
+
+        /* Icons */
+        .icon-box {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            margin-right: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .icon-blue {
+            background: linear-gradient(135deg, var(--azul-claro), var(--azul-medio));
+            color: var(--blanco);
+        }
+
+        .icon-orange {
+            background: linear-gradient(135deg, var(--naranja), var(--naranja-oscuro));
+            color: var(--blanco);
+        }
+
+        /* Comparison table */
+        .comparison-table {
+            margin: 2rem 0;
+        }
+
+        .comparison-table h4 {
+            color: var(--azul-oscuro);
+            margin: 1.5rem 0 1rem;
+            font-size: 1.3rem;
+        }
+
+        /* Callout boxes */
+        .callout {
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1.5rem 0;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .callout-info {
+            background: linear-gradient(135deg, #e6fffa 0%, #b2f5ea 100%);
+            border-left: 5px solid #38b2ac;
+        }
+
+        .callout-warning {
+            background: linear-gradient(135deg, #fffaf0 0%, #feebc8 100%);
+            border-left: 5px solid var(--naranja);
+        }
+
+        .callout-icon {
+            font-size: 2rem;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+
+        .callout-content h4 {
+            margin-bottom: 0.5rem;
+            color: var(--azul-oscuro);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <h1 class="brand">Bucle <span>Creativo</span></h1>
+            <h2 class="subtitle">¿Por qué tu cuaderno y tu Excel ya no son suficientes?</h2>
+            <p class="chapter-info">Capítulo 1: Del caos de los datos al orden de la información</p>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Learning Objective -->
+        <section class="card">
+            <div class="card-header">
+                <div class="card-icon">
+                    <i class="fas fa-bullseye"></i>
+                </div>
+                <h2 class="card-title">Objetivo de aprendizaje</h2>
+            </div>
+            <div class="objective-text">
+                <strong>Comprender</strong> la diferencia fundamental entre datos e información y reconocer las limitaciones de las herramientas tradicionales (cuadernos y hojas de cálculo) frente al crecimiento de un negocio, mediante el análisis del caso práctico "Denim Ecuador" y la identificación de problemas de redundancia, inconsistencia y duplicación de datos, con el fin de desarrollar el pensamiento crítico sobre la gestión de la información, la capacidad de diagnosticar problemas de organización de datos y una actitud proactiva hacia la implementación de soluciones tecnológicas adecuadas, reconociendo que una base de datos no es solo una herramienta técnica, sino una forma de pensar que convierte el caos en orden y los datos en decisiones inteligentes.
+            </div>
+        </section>
+
+        <!-- Activation -->
+        <section class="card">
+            <div class="card-header">
+                <div class="card-icon">
+                    <i class="fas fa-lightbulb"></i>
+                </div>
+                <h2 class="card-title">Activación: El caos del emprendedor</h2>
+            </div>
+            
+            <div class="story-box">
+                <p><strong>Imagina esto...</strong> Es lunes por la mañana. Tienes una tienda de jeans llamada "Denim Ecuador" que empezó vendiendo por WhatsApp a amigos y familiares. Hace seis meses, vendías 10 jeans a la semana. Hoy, vendes 50. Tu celular no para de sonar. Tu cuaderno de pedidos está lleno de tachones. Tu archivo de Excel tiene tantas pestañas que ya no sabes en cuál estás.</p>
+                
+                <p>Y tu socio te pregunta: <em>"¿Cuántos jeans azules talla 32 nos quedan?"</em></p>
+                
+                <p>Tú abres el cuaderno, abres el Excel, revisas los mensajes de WhatsApp... y después de 20 minutos, le respondes: <em>"Creo que nos quedan como 8, pero no estoy seguro"</em>.</p>
+            </div>
+
+            <p>Esa <span class="highlight">inseguridad</span>, ese <span class="highlight">caos</span>, esa <span class="highlight">pérdida de tiempo</span>... eso es exactamente lo que vamos a resolver en este taller.</p>
+
+            <p>Este capítulo no tiene código. No vas a escribir una sola línea de SQL. Y eso está bien. Porque antes de aprender a usar una herramienta, necesitas entender <strong>por qué la necesitas</strong>. Si no comprendes el problema, la solución no tendrá sentido.</p>
+
+            <p>Así que ponte cómodo. Vamos a contar la historia de cómo un emprendimiento exitoso se ahoga en su propio éxito... y cómo una base de datos lo salva.</p>
+        </section>
+
+        <!-- Development -->
+        <section class="card">
+            <div class="card-header">
+                <div class="card-icon">
+                    <i class="fas fa-book-open"></i>
+                </div>
+                <h2 class="card-title">Desarrollo: Los fundamentos del caos y el orden</h2>
+            </div>
+
+            <h3 style="color: var(--azul-oscuro); margin: 2rem 0 1rem; font-size: 1.5rem;">
+                <i class="fas fa-store icon-box icon-blue"></i>
+                La historia de "Denim Ecuador"
+            </h3>
+
+            <p>María y Andrés son primos. Ella vive en Quito, él en Guayaquil. Hace un año, decidieron vender jeans importados. Empezaron con un catálogo en PDF y un número de WhatsApp Business. Los primeros meses fueron mágicos: 5 pedidos por día, todos fáciles de manejar. María anotaba cada pedido en un cuaderno:</p>
+
+            <div style="background: #f7fafc; padding: 1.5rem; border-radius: 8px; margin: 1.5rem 0; font-family: monospace;">
+                <p>1. 15 de marzo - Juan Pérez - Jean Skinny Azul - Talla 32 - $45</p>
+                <p>2. 16 de marzo - Luisa Gómez - Jean Recto Negro - Talla 28 - $40</p>
+                <p>3. 17 de marzo - Carlos Vera - Jean Slim Gris - Talla 34 - $42</p>
+            </div>
+
+            <p>Todo funcionaba bien. Hasta que empezó a crecer.</p>
+
+            <h4 style="color: var(--azul-medio); margin: 2rem 0 1rem;">El punto de quiebre</h4>
+
+            <p>A los seis meses, "Denim Ecuador" estaba recibiendo 50 pedidos diarios. María ya no podía usar un cuaderno. Así que migró a Excel. Creó una hoja llamada "Pedidos Marzo", otra "Pedidos Abril", y así sucesivamente. Cada fila era un pedido. Cada columna, un dato:</p>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Cliente</th>
+                        <th>Teléfono</th>
+                        <th>Ciudad</th>
+                        <th>Jean</th>
+                        <th>Talla</th>
+                        <th>Color</th>
+                        <th>Precio</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>15/03</td>
+                        <td>Juan Pérez</td>
+                        <td>0999123456</td>
+                        <td>Quito</td>
+                        <td>Skinny</td>
+                        <td>32</td>
+                        <td>Azul</td>
+                        <td>$45</td>
+                        <td>Entregado</td>
+                    </tr>
+                    <tr>
+                        <td>16/03</td>
+                        <td>Luisa Gómez</td>
+                        <td>0988654321</td>
+                        <td>Guayaquil</td>
+                        <td>Recto</td>
+                        <td>28</td>
+                        <td>Negro</td>
+                        <td>$40</td>
+                        <td>Enviado</td>
+                    </tr>
+                    <tr>
+                        <td>17/03</td>
+                        <td>Carlos Vera</td>
+                        <td>0977111222</td>
+                        <td>Cuenca</td>
+                        <td>Slim</td>
+                        <td>34</td>
+                        <td>Gris</td>
+                        <td>$42</td>
+                        <td>Pendiente</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>El problema empezó cuando un cliente pidió <strong>dos jeans diferentes</strong> en el mismo pedido. María tuvo que duplicar toda la fila:</p>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Cliente</th>
+                        <th>Teléfono</th>
+                        <th>Ciudad</th>
+                        <th>Jean</th>
+                        <th>Talla</th>
+                        <th>Color</th>
+                        <th>Precio</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>20/03</td>
+                        <td>Ana Torres</td>
+                        <td>0966555444</td>
+                        <td>Quito</td>
+                        <td>Skinny</td>
+                        <td>30</td>
+                        <td>Rojo</td>
+                        <td>$45</td>
+                        <td>Pendiente</td>
+                    </tr>
+                    <tr>
+                        <td>20/03</td>
+                        <td>Ana Torres</td>
+                        <td>0966555444</td>
+                        <td>Quito</td>
+                        <td>Recto</td>
+                        <td>30</td>
+                        <td>Negro</td>
+                        <td>$40</td>
+                        <td>Pendiente</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>Ahora tenía datos duplicados. Si Ana cambiaba de dirección, María tenía que cambiarlo en dos filas. Y si se equivocaba en una, la otra quedaba con la dirección vieja. <strong>Inconsistencia de datos</strong>, le diría un experto. Pero para María, era simplemente un dolor de cabeza.</p>
+
+            <h3 style="color: var(--azul-oscuro); margin: 2.5rem 0 1.5rem; font-size: 1.5rem;">
+                <i class="fas fa-exclamation-triangle icon-box icon-orange"></i>
+                Los síntomas del caos
+            </h3>
+
+            <p>Cuando un negocio crece y usa herramientas inadecuadas, empiezan a aparecer estos problemas:</p>
+
+            <ul class="problem-list">
+                <li>
+                    <div>
+                        <strong>Datos duplicados</strong>
+                        La misma información repetida en múltiples lugares.
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <strong>Datos inconsistentes</strong>
+                        La misma información con valores diferentes en distintos lugares.
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <strong>Datos huérfanos</strong>
+                        Información que no sabes a quién pertenece (un pedido sin nombre de cliente).
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <strong>Datos redundantes</strong>
+                        Escribir "Quito, Pichincha, Ecuador" en cada fila cuando podrías solo escribir "Quito".
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <strong>Dificultad para buscar</strong>
+                        ¿Cuántos jeans azules talla 32 vendiste en marzo? Buena suerte encontrándolo en 5 hojas de Excel diferentes.
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <strong>Errores humanos</strong>
+                        Alguien escribió "3O" (con letra O) en lugar de "30" (con número cero). Ahora el sistema no reconoce esa talla.
+                    </div>
+                </li>
+            </ul>
+
+            <div class="callout callout-warning">
+                <div class="callout-icon">💡</div>
+                <div class="callout-content">
+                    <h4>La pregunta clave</h4>
+                    <p>¿Te suena familiar? Quizás no tengas una tienda de jeans, pero si alguna vez has manejado una lista de contactos, un inventario, o incluso las calificaciones de un curso, sabes de lo que hablo.</p>
+                    <p>El problema no es tu capacidad. El problema es que <strong>estás usando la herramienta equivocada para el tamaño de tu problema</strong>. Un cuaderno es perfecto para 10 pedidos. Excel es perfecto para 100. Pero cuando llegas a 1,000, 10,000 o 100,000 registros, necesitas algo más poderoso.</p>
+                    <p><strong>Necesitas una base de datos.</strong></p>
+                </div>
+            </div>
+
+            <h3 style="color: var(--azul-oscuro); margin: 2.5rem 0 1.5rem; font-size: 1.5rem;">
+                <i class="fas fa-database icon-box icon-blue"></i>
+                Datos vs. Información: La diferencia crucial
+            </h3>
+
+            <p>Antes de seguir, necesitamos aclarar dos palabras que mucha gente usa como si fueran lo mismo, pero no lo son: <strong>datos</strong> e <strong>información</strong>.</p>
+
+            <div class="concept-grid">
+                <div class="concept-card">
+                    <h3><i class="fas fa-hashtag"></i> ¿Qué son los datos?</h3>
+                    <p>Los <strong>datos</strong> son hechos crudos, sin contexto, sin procesar. Son símbolos, números, palabras sueltas.</p>
+                    <p style="margin-top: 1rem;"><strong>Ejemplos de datos en "Denim Ecuador":</strong></p>
+                    <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                        <li>32</li>
+                        <li>Azul</li>
+                        <li>$45</li>
+                        <li>Quito</li>
+                        <li>15/03/2026</li>
+                    </ul>
+                    <p style="margin-top: 1rem;">Por sí solos, estos datos no significan nada. ¿32 qué? ¿Azul de qué? ¿$45 de qué?</p>
+                </div>
+
+                <div class="concept-card">
+                    <h3><i class="fas fa-info-circle"></i> ¿Qué es la información?</h3>
+                    <p>La <strong>información</strong> son datos procesados, organizados, con contexto. Es cuando los datos responden una pregunta o te ayudan a tomar una decisión.</p>
+                    <p style="margin-top: 1rem;"><strong>Ejemplos de información:</strong></p>
+                    <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                        <li>"El jean talla 32 color azul cuesta $45."</li>
+                        <li>"Vendimos 150 jeans azules en marzo."</li>
+                        <li>"La ciudad que más compra es Quito."</li>
+                        <li>"El jean más vendido es el modelo Skinny en talla 32."</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h4 style="color: var(--azul-medio); margin: 2rem 0 1rem;">La transformación mágica</h4>
+
+            <p>El poder de una base de datos no es solo <strong>guardar datos</strong>. Es <strong>convertir datos en información</strong> de manera rápida y confiable.</p>
+
+            <table class="data-table comparison-table">
+                <thead>
+                    <tr>
+                        <th>Nivel</th>
+                        <th>Ejemplo</th>
+                        <th>Herramienta</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Dato</strong></td>
+                        <td>"Azul, 32, $45"</td>
+                        <td>Cuaderno</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Información</strong></td>
+                        <td>"Jean Skinny Azul Talla 32 - $45"</td>
+                        <td>Excel</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Conocimiento</strong></td>
+                        <td>"Los jeans azules talla 32 se venden 3 veces más en Quito que en Guayaquil"</td>
+                        <td>Base de Datos</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Sabiduría</strong></td>
+                        <td>"Deberíamos importar más jeans azules talla 32 para la próxima temporada en Quito"</td>
+                        <td>Tú, tomando decisiones</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="callout callout-info">
+                <div class="callout-icon">️</div>
+                <div class="callout-content">
+                    <h4>La regla de oro</h4>
+                    <p><strong>Los datos son el petróleo del siglo XXI.</strong> Pero el petróleo crudo no sirve para nada hasta que lo refinas. Tu base de datos es la refinería.</p>
+                </div>
+            </div>
+
+            <h3 style="color: var(--azul-oscuro); margin: 2.5rem 0 1.5rem; font-size: 1.5rem;">
+                <i class="fas fa-shield-alt icon-box icon-blue"></i>
+                La promesa de la Base de Datos
+            </h3>
+
+            <p>Una base de datos es el cerebro de tu negocio. Es donde vive toda la verdad de tu empresa, protegida, organizada y lista para responder cualquier pregunta que le hagas.</p>
+
+            <div class="concept-grid">
+                <div class="concept-card">
+                    <h3><i class="fas fa-lock"></i> 1. Seguridad</h3>
+                    <p>Tus datos están protegidos. Una base de datos profesional tiene:</p>
+                    <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                        <li><strong>Control de acceso:</strong> No todos pueden ver o modificar todo.</li>
+                        <li><strong>Respaldos automáticos:</strong> Copias de seguridad cada hora, día o semana.</li>
+                        <li><strong>Protección contra errores:</strong> El sistema te detiene antes de borrar algo importante.</li>
+                        <li><strong>Transacciones:</strong> O se guarda completo o no se guarda. Nunca a medias.</li>
+                    </ul>
+                </div>
+
+                <div class="concept-card">
+                    <h3><i class="fas fa-tachometer-alt"></i> 2. Velocidad</h3>
+                    <p>Respuestas en milisegundos. Una base de datos profesional puede:</p>
+                    <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                        <li>Buscar un cliente específico entre 1 millón de registros en <strong>menos de 1 milisegundo</strong>.</li>
+                        <li>Calcular el total de ventas del año en <strong>menos de 1 segundo</strong>.</li>
+                        <li>Manejar miles de usuarios preguntando cosas al mismo tiempo, sin ralentizarse.</li>
+                    </ul>
+                </div>
+
+                <div class="concept-card">
+                    <h3><i class="fas fa-sort-amount-down"></i> 3. Orden</h3>
+                    <p>Integridad y consistencia garantizadas con reglas de integridad:</p>
+                    <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                        <li><strong>No puedes tener datos duplicados:</strong> Cada cliente tiene un número de cédula único.</li>
+                        <li><strong>No puedes tener datos huérfanos:</strong> No puedes registrar un pedido de un cliente que no existe.</li>
+                        <li><strong>No puedes tener datos inválidos:</strong> Si la columna "Talla" solo acepta números, no te dejará escribir "treinta y dos".</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h4 style="color: var(--azul-medio); margin: 2rem 0 1rem;">Comparación final: Cuaderno vs. Excel vs. Base de Datos</h4>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Característica</th>
+                        <th>Cuaderno</th>
+                        <th>Excel</th>
+                        <th>Base de Datos (PostgreSQL)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Capacidad</strong></td>
+                        <td>~100 registros</td>
+                        <td>~10,000 registros</td>
+                        <td>Millones de registros</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Velocidad de búsqueda</strong></td>
+                        <td>Lenta (hojear páginas)</td>
+                        <td>Media (filtros)</td>
+                        <td>Rápida (milisegundos)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Seguridad</strong></td>
+                        <td>Nula (cualquiera lo lee)</td>
+                        <td>Baja (contraseña de archivo)</td>
+                        <td>Alta (usuarios, permisos, encriptación)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Integridad</strong></td>
+                        <td>Depende de tu letra</td>
+                        <td>Depende de tu cuidado</td>
+                        <td>Garantizada por el sistema</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Multiusuario</strong></td>
+                        <td>No (uno a la vez)</td>
+                        <td>Limitado (bloqueo de archivo)</td>
+                        <td>Sí (miles de usuarios simultáneos)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Consultas complejas</strong></td>
+                        <td>Imposible</td>
+                        <td>Difícil (fórmulas manuales)</td>
+                        <td>Fácil (lenguaje SQL)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Costo</strong></td>
+                        <td>$1</td>
+                        <td>$0 (o incluido en Office)</td>
+                        <td><strong>$0 (PostgreSQL es gratuito)</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="callout callout-info">
+                <div class="callout-icon">🎉</div>
+                <div class="callout-content">
+                    <h4>La gran noticia</h4>
+                    <p><strong>PostgreSQL, el sistema de base de datos que vamos a usar en este libro, es completamente gratuito.</strong> Es de código abierto, lo que significa que es desarrollado por una comunidad global de programadores y es usado por empresas como Apple, Netflix y Spotify.</p>
+                    <p>No necesitas pagar licencias. No necesitas versiones "premium". Tienes acceso a la misma tecnología que usan las empresas más grandes del mundo.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Challenge -->
+        <section class="card">
+            <div class="card-header">
+                <div class="card-icon">
+                    <i class="fas fa-tasks"></i>
+                </div>
+                <h2 class="card-title">Manos a la obra: Tu primer diagnóstico de datos</h2>
+            </div>
+
+            <p>Ha llegado el momento de dejar de leer y empezar a hacer. En esta actividad, vas a experimentar en carne propia los problemas de usar herramientas inadecuadas, y vas a descubrir por ti mismo por qué necesitas una base de datos.</p>
+
+            <div class="challenge-box">
+                <h3><i class="fas fa-bullseye" style="margin-right: 0.5rem;"></i> Objetivo</h3>
+                <p>Identificar los problemas de redundancia, inconsistencia y duplicación en un archivo de datos mal diseñado, y proponer soluciones iniciales.</p>
+
+                <h3 style="margin-top: 2rem;"><i class="fas fa-tools" style="margin-right: 0.5rem;"></i> Materiales necesarios</h3>
+                <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                    <li>Una hoja de papel o un documento en Word/Excel</li>
+                    <li>Lápiz y borrador (si usas papel)</li>
+                    <li>20 minutos de tu tiempo</li>
+                </ul>
+            </div>
+
+            <h4 style="color: var(--azul-oscuro); margin: 2rem 0 1rem;">Paso 1: Analiza el "Excel caótico"</h4>
+            <p>Imagina que este es el archivo que María te pasa cuando llegas como consultor a "Denim Ecuador":</p>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Cliente</th>
+                        <th>Teléfono</th>
+                        <th>Ciudad</th>
+                        <th>Jean</th>
+                        <th>Talla</th>
+                        <th>Color</th>
+                        <th>Precio</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>15/03/2026</td>
+                        <td>Juan Pérez</td>
+                        <td>0999123456</td>
+                        <td>Quito</td>
+                        <td>Skinny</td>
+                        <td>32</td>
+                        <td>Azul</td>
+                        <td>$45</td>
+                        <td>Entregado</td>
+                    </tr>
+                    <tr>
+                        <td>16/03/2026</td>
+                        <td>Luisa Gómez</td>
+                        <td>0988654321</td>
+                        <td>Guayaquil</td>
+                        <td>Recto</td>
+                        <td>28</td>
+                        <td>Negro</td>
+                        <td>$40</td>
+                        <td>Enviado</td>
+                    </tr>
+                    <tr>
+                        <td>17/03/2026</td>
+                        <td>Carlos Vera</td>
+                        <td>0977111222</td>
+                        <td>Cuenca</td>
+                        <td>Slim</td>
+                        <td>34</td>
+                        <td>Gris</td>
+                        <td>$42</td>
+                        <td>Pendiente</td>
+                    </tr>
+                    <tr>
+                        <td>20/03/2026</td>
+                        <td>Ana Torres</td>
+                        <td>0966555444</td>
+                        <td>Quito</td>
+                        <td>Skinny</td>
+                        <td>30</td>
+                        <td>Rojo</td>
+                        <td>$45</td>
+                        <td>Pendiente</td>
+                    </tr>
+                    <tr>
+                        <td>20/03/2026</td>
+                        <td>Ana Torres</td>
+                        <td>0966555444</td>
+                        <td>Quito</td>
+                        <td>Recto</td>
+                        <td>30</td>
+                        <td>Negro</td>
+                        <td>$40</td>
+                        <td>Pendiente</td>
+                    </tr>
+                    <tr>
+                        <td>22/03/2026</td>
+                        <td>Juan Pérez</td>
+                        <td>0999123457</td>
+                        <td>Quito</td>
+                        <td>Bootcut</td>
+                        <td>32</td>
+                        <td>Azul</td>
+                        <td>$48</td>
+                        <td>Enviado</td>
+                    </tr>
+                    <tr>
+                        <td>25/03/2026</td>
+                        <td>María López</td>
+                        <td>0955444333</td>
+                        <td>Ambato</td>
+                        <td>Skinny</td>
+                        <td>28</td>
+                        <td>Azul</td>
+                        <td>$45</td>
+                        <td>Entregado</td>
+                    </tr>
+                    <tr>
+                        <td>28/03/2026</td>
+                        <td>Pedro Ramírez</td>
+                        <td>0944333222</td>
+                        <td>Quito</td>
+                        <td>Slim</td>
+                        <td>36</td>
+                        <td>Negro</td>
+                        <td>$42</td>
+                        <td>Pendiente</td>
+                    </tr>
+                    <tr>
+                        <td>30/03/2026</td>
+                        <td>Luisa Gómez</td>
+                        <td>0988654321</td>
+                        <td>Guayaquil</td>
+                        <td>Recto</td>
+                        <td>29</td>
+                        <td>Azul</td>
+                        <td>$40</td>
+                        <td>Entregado</td>
+                    </tr>
+                    <tr>
+                        <td>02/04/2026</td>
+                        <td>Carlos Vera</td>
+                        <td>0977111222</td>
+                        <td>Cuenca</td>
+                        <td>Skinny</td>
+                        <td>34</td>
+                        <td>Gris</td>
+                        <td>$45</td>
+                        <td>Enviado</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4 style="color: var(--azul-oscuro); margin: 2rem 0 1rem;">Paso 2: Identifica los problemas</h4>
+            <p>Ahora, con tu lápiz (o en tu documento), responde estas preguntas:</p>
+
+            <ol style="margin-left: 1.5rem; line-height: 2;">
+                <li><strong>Datos duplicados:</strong> ¿Qué información se repite innecesariamente en varias filas?
+                    <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                        <li><em>Pista:</em> Mira los nombres de clientes, teléfonos y ciudades.</li>
+                    </ul>
+                </li>
+                <li><strong>Datos inconsistentes:</strong> ¿Hay algún dato que debería ser igual pero aparece diferente?
+                    <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                        <li><em>Pista:</em> Mira el teléfono de Juan Pérez en las filas 1 y 6.</li>
+                    </ul>
+                </li>
+                <li><strong>Datos redundantes:</strong> ¿Hay información que se repite en cada fila pero podría estar en un solo lugar?
+                    <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                        <li><em>Pista:</em> ¿Necesitas escribir "Quito" cada vez que hay un cliente de Quito?</li>
+                    </ul>
+                </li>
+                <li><strong>Problemas de estructura:</strong> ¿Qué pasa cuando un cliente compra dos jeans en el mismo pedido?
+                    <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                        <li><em>Pista:</em> Mira las filas 4 y 5 (Ana Torres).</li>
+                    </ul>
+                </li>
+                <li><strong>Problemas de integridad:</strong> ¿Qué pasa si borras la fila de Juan Pérez? ¿Qué información pierdes?</li>
+            </ol>
+
+            <h4 style="color: var(--azul-oscuro); margin: 2rem 0 1rem;">Paso 3: Propón soluciones</h4>
+            <p>Ahora que identificaste los problemas, escribe tus propias soluciones. No te preocupes si no son "técnicamente perfectas". Lo importante es que pienses cómo lo resolverías.</p>
+
+            <p><strong>Preguntas guía:</strong></p>
+            <ol style="margin-left: 1.5rem; line-height: 2;">
+                <li>¿Cómo organizarías la información para no repetir datos de clientes?</li>
+                <li>¿Cómo separarías la información del cliente de la información del pedido?</li>
+                <li>¿Cómo manejarías el caso de un cliente que compra dos jeans en el mismo pedido?</li>
+                <li>¿Qué reglas pondrías para evitar errores (como teléfonos mal escritos)?</li>
+            </ol>
+
+            <h4 style="color: var(--azul-oscuro); margin: 2rem 0 1rem;">Paso 4: Reflexiona</h4>
+            <p>Escribe un párrafo corto respondiendo:</p>
+            <ol style="margin-left: 1.5rem; line-height: 2;">
+                <li>¿Por qué este archivo de Excel es problemático para un negocio que va a crecer?</li>
+                <li>¿Qué pasaría si tuvieras 1,000 pedidos en lugar de 10?</li>
+                <li>¿Qué tipo de preguntas le harías a este archivo que serían difíciles de responder?</li>
+            </ol>
+
+            <div class="challenge-box" style="margin-top: 2rem;">
+                <h3><i class="fas fa-lightbulb" style="margin-right: 0.5rem;"></i> Soluciones propuestas (¡No mires hasta intentarlo!)</h3>
+                <p>Estas son las soluciones que vamos a implementar en los próximos capítulos:</p>
+                <ol style="margin-left: 1.5rem; margin-top: 1rem; line-height: 2;">
+                    <li>Crear una tabla separada de <strong>Clientes</strong> (con cédula, nombre, teléfono, ciudad).</li>
+                    <li>Crear una tabla de <strong>Jeans</strong> (con código, modelo, talla, color, precio).</li>
+                    <li>Crear una tabla de <strong>Pedidos</strong> (con fecha, cliente, estado).</li>
+                    <li>Crear una tabla de <strong>Detalle_Pedidos</strong> (con el pedido, el jean, la cantidad).</li>
+                </ol>
+                <div class="hint" style="margin-top: 1.5rem;">
+                    <p><strong>¡Felicidades!</strong> Acabas de hacer tu primer diseño conceptual de base de datos.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quiz Section -->
+        <section class="card">
+            <div class="card-header">
+                <div class="card-icon">
+                    <i class="fas fa-gamepad"></i>
+                </div>
+                <h2 class="card-title">Evaluación lúdica: Pon a prueba lo aprendido</h2>
+            </div>
+
+            <div class="quiz-container">
+                <div class="quiz-header">
+                    <h3><i class="fas fa-brain" style="margin-right: 0.5rem;"></i> Test de Conocimientos</h3>
+                    <p>Demuestra lo que has aprendido sobre bases de datos, datos vs. información y los problemas del caos de datos.</p>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressBar"></div>
+                    </div>
+                    <p style="font-size: 0.9rem; color: var(--gris-medio);">Pregunta <span id="currentQuestion">1</span> de 5</p>
+                </div>
+
+                <div id="quizContent">
+                    <!-- Questions will be dynamically inserted here -->
+                </div>
+
+                <div class="score-display" id="scoreDisplay">
+                    <div class="score-circle">
+                        <div class="score-number" id="scoreNumber">0</div>
+                        <div class="score-label">de 5 puntos</div>
+                    </div>
+                    <div class="final-message" id="finalMessage"></div>
+                    <button class="next-btn show" onclick="restartQuiz()" style="margin-top: 2rem;">
+                        <i class="fas fa-redo" style="margin-right: 0.5rem;"></i>Intentar de nuevo
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Closing -->
+        <section class="card">
+            <div class="card-header">
+                <div class="card-icon">
+                    <i class="fas fa-flag-checkered"></i>
+                </div>
+                <h2 class="card-title">Cierre del capítulo: El inicio de tu viaje</h2>
+            </div>
+
+            <p>Si llegaste hasta aquí, ya diste el primer paso más importante: <strong>entender el problema</strong>.</p>
+
+            <p>En los próximos capítulos, vamos a aprender a diseñar la solución. Empezaremos dibujando planos, luego construiremos las tablas en PostgreSQL, y finalmente aprenderemos a hacerle preguntas poderosas a nuestra base de datos.</p>
+
+            <div class="story-box" style="background: linear-gradient(135deg, #e6fffa 0%, #b2f5ea 100%); border-left-color: #38b2ac;">
+                <p><strong>Pero recuerda esto:</strong> una base de datos no es solo una herramienta técnica. Es una forma de pensar. Es la disciplina de organizar el caos, de convertir datos en información, y de tomar decisiones basadas en hechos, no en suposiciones.</p>
+            </div>
+
+            <p>María y Andrés no lo sabían cuando empezaron "Denim Ecuador" con un cuaderno y un WhatsApp. Pero ahora lo saben. Y tú también.</p>
+
+            <p style="font-size: 1.2rem; color: var(--azul-medio); font-weight: 600; margin-top: 2rem;">
+                <i class="fas fa-arrow-right" style="margin-right: 0.5rem;"></i>
+                Nos vemos en el Capítulo 2, donde vamos a aprender el lenguaje secreto de los datos.
+            </p>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p class="footer-text">Taller diseñado con el corazón de un docente y la mente de un programador.</p>
+        <p class="footer-author">Diseñado por: Edwin Méndez J.</p>
+    </footer>
+
+    <script>
+        // Quiz Data
+        const questions = [
+            {
+                question: "¿Cuál es la diferencia principal entre un dato y una información?",
+                options: [
+                    "No hay diferencia, son lo mismo",
+                    "Los datos son hechos crudos sin contexto; la información son datos procesados con contexto",
+                    "Los datos son más importantes que la información",
+                    "La información es más fácil de obtener que los datos"
+                ],
+                correct: 1,
+                explanation: "¡Exacto! Los datos son hechos crudos sin contexto (como '32', 'Azul'), mientras que la información son datos procesados que responden preguntas (como 'Jean talla 32 color azul')."
+            },
+            {
+                question: "En el caso de 'Denim Ecuador', ¿qué problema ocurre cuando Ana Torres compra dos jeans en el mismo pedido?",
+                options: [
+                    "No hay ningún problema",
+                    "El sistema se vuelve más rápido",
+                    "Se duplican datos como nombre, teléfono y ciudad, creando redundancia e inconsistencia",
+                    "El pedido se cancela automáticamente"
+                ],
+                correct: 2,
+                explanation: "¡Correcto! Cuando un cliente compra múltiples productos, duplicar toda la fila genera redundancia (misma información repetida) y riesgo de inconsistencia (si un dato cambia en una fila pero no en la otra)."
+            },
+            {
+                question: "¿Cuál de los siguientes NO es uno de los tres pilares de una base de datos profesional?",
+                options: [
+                    "Seguridad",
+                    "Velocidad",
+                    "Orden/Integridad",
+                    "Diseño visual atractivo"
+                ],
+                correct: 3,
+                explanation: "¡Bien! Los tres pilares son: Seguridad (protección de datos), Velocidad (respuestas en milisegundos) y Orden/Integridad (consistencia garantizada). El diseño visual no es un pilar funcional de una base de datos."
+            },
+            {
+                question: "¿Qué ventaja tiene PostgreSQL sobre Excel cuando se trata de manejar grandes volúmenes de datos?",
+                options: [
+                    "PostgreSQL es más bonito visualmente",
+                    "PostgreSQL puede manejar millones de registros con velocidad y mantener la integridad de los datos",
+                    "Excel es mejor para todo tipo de datos",
+                    "No hay diferencia significativa"
+                ],
+                correct: 1,
+                explanation: "¡Perfecto! PostgreSQL puede manejar millones de registros, responder consultas en milisegundos, garantizar integridad de datos y permitir múltiples usuarios simultáneos, mientras que Excel colapsa con grandes volúmenes."
+            },
+            {
+                question: "Si Juan Pérez aparece dos veces en el Excel con teléfonos diferentes (0999123456 y 0999123457), ¿qué tipo de problema de datos es este?",
+                options: [
+                    "Dato duplicado",
+                    "Dato inconsistente",
+                    "Dato huérfano",
+                    "Dato redundante"
+                ],
+                correct: 1,
+                explanation: "¡Excelente! Es un dato inconsistente: la misma información (teléfono de Juan Pérez) tiene valores diferentes en distintos lugares, lo que genera incertidumbre sobre cuál es el correcto."
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let answered = false;
+
+        // Initialize Quiz
+        function initQuiz() {
+            currentQuestionIndex = 0;
+            score = 0;
+            answered = false;
+            document.getElementById('scoreDisplay').classList.remove('show');
+            loadQuestion();
+            updateProgress();
+        }
+
+        // Load Question
+        function loadQuestion() {
+            answered = false;
+            const question = questions[currentQuestionIndex];
+            const quizContent = document.getElementById('quizContent');
+            
+            let optionsHTML = '';
+            const letters = ['A', 'B', 'C', 'D'];
+            
+            question.options.forEach((option, index) => {
+                optionsHTML += `
+                    <div class="option" onclick="selectOption(${index})" id="option-${index}">
+                        <div class="option-letter">${letters[index]}</div>
+                        <div>${option}</div>
+                    </div>
+                `;
+            });
+
+            quizContent.innerHTML = `
+                <div class="question-container">
+                    <p>
+                        <span class="question-number">${currentQuestionIndex + 1}</span>
+                        <span class="question-text">${question.question}</span>
+                    </p>
+                    <div class="options">
+                        ${optionsHTML}
+                    </div>
+                    <div class="feedback" id="feedback"></div>
+                    <button class="next-btn" id="nextBtn" onclick="nextQuestion()">
+                        ${currentQuestionIndex === questions.length - 1 ? 'Ver resultado' : 'Siguiente pregunta'} 
+                        <i class="fas fa-arrow-right" style="margin-left: 0.5rem;"></i>
+                    </button>
+                </div>
+            `;
+
+            document.getElementById('currentQuestion').textContent = currentQuestionIndex + 1;
+        }
+
+        // Select Option
+        function selectOption(selectedIndex) {
+            if (answered) return;
+            
+            answered = true;
+            const question = questions[currentQuestionIndex];
+            const options = document.querySelectorAll('.option');
+            const feedback = document.getElementById('feedback');
+            const nextBtn = document.getElementById('nextBtn');
+
+            // Disable all options
+            options.forEach(opt => opt.style.pointerEvents = 'none');
+
+            // Mark selected option
+            if (selectedIndex === question.correct) {
+                options[selectedIndex].classList.add('selected-correct');
+                score++;
+                feedback.className = 'feedback correct show';
+                feedback.innerHTML = '<i class="fas fa-check-circle" style="margin-right: 0.5rem;"></i><strong>¡Correcto!</strong><br>' + question.explanation;
+            } else {
+                options[selectedIndex].classList.add('selected-incorrect');
+                options[question.correct].classList.add('selected-correct');
+                feedback.className = 'feedback incorrect show';
+                feedback.innerHTML = '<i class="fas fa-times-circle" style="margin-right: 0.5rem;"></i><strong>Incorrecto</strong><br>' + question.explanation;
+            }
+
+            nextBtn.classList.add('show');
+        }
+
+        // Next Question
+        function nextQuestion() {
+            currentQuestionIndex++;
+            
+            if (currentQuestionIndex < questions.length) {
+                loadQuestion();
+                updateProgress();
+            } else {
+                showResults();
+            }
+        }
+
+        // Update Progress Bar
+        function updateProgress() {
+            const progress = ((currentQuestionIndex) / questions.length) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+        }
+
+        // Show Results
+        function showResults() {
+            document.getElementById('progressBar').style.width = '100%';
+            document.getElementById('quizContent').style.display = 'none';
+            document.getElementById('scoreDisplay').classList.add('show');
+            document.getElementById('scoreNumber').textContent = score;
+
+            let message = '';
+            if (score === 5) {
+                message = '🎉 ¡Excelente! Dominas completamente los conceptos. Estás listo para el siguiente nivel.';
+            } else if (score >= 3) {
+                message = '👍 ¡Muy bien! Tienes una buena comprensión. Sigue practicando para dominar todos los conceptos.';
+            } else {
+                message = '📚 Buen intento. Te recomiendo repasar el contenido y volver a intentarlo. ¡Cada error es una oportunidad de aprendizaje!';
+            }
+
+            document.getElementById('finalMessage').textContent = message;
+        }
+
+        // Restart Quiz
+        function restartQuiz() {
+            document.getElementById('quizContent').style.display = 'block';
+            initQuiz();
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', initQuiz);
+
+        // Smooth scroll for better UX
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeIn 0.8s ease';
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.card').forEach(card => {
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>

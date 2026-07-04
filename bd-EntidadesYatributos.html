@@ -1,0 +1,1517 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entidades y Atributos - Bucle Creativo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --dark-blue: #1e3a5f;
+            --medium-blue: #2c5282;
+            --light-blue: #4299e1;
+            --orange: #ed8936;
+            --light-orange: #fbd38d;
+            --white: #ffffff;
+            --gray-100: #f7fafc;
+            --gray-200: #edf2f7;
+            --gray-600: #4a5568;
+            --gray-800: #2d3748;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, var(--gray-100) 0%, var(--gray-200) 100%);
+            color: var(--gray-800);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--dark-blue) 0%, var(--medium-blue) 100%);
+            color: var(--white);
+            padding: 3rem 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            font-size: 1.8rem;
+            font-weight: 300;
+            color: var(--light-orange);
+            margin-bottom: 1rem;
+        }
+
+        .chapter-info {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--white);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        nav a {
+            color: var(--dark-blue);
+            text-decoration: none;
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            border: 2px solid transparent;
+        }
+
+        nav a:hover {
+            background: var(--orange);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+
+        /* Sections */
+        section {
+            background: var(--white);
+            margin: 2rem 0;
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        h2 {
+            color: var(--dark-blue);
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 4px solid var(--orange);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        h3 {
+            color: var(--medium-blue);
+            font-size: 1.6rem;
+            margin: 2rem 0 1rem 0;
+        }
+
+        h4 {
+            color: var(--gray-800);
+            font-size: 1.3rem;
+            margin: 1.5rem 0 0.75rem 0;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            text-align: justify;
+        }
+
+        /* Objective Box */
+        .objective-box {
+            background: linear-gradient(135deg, var(--light-blue) 0%, var(--medium-blue) 100%);
+            color: var(--white);
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+            border-left: 6px solid var(--orange);
+        }
+
+        .objective-box h3 {
+            color: var(--white);
+            margin-top: 0;
+        }
+
+        /* Cards */
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-top: 5px solid var(--orange);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            color: var(--orange);
+            margin-bottom: 1rem;
+        }
+
+        .card h4 {
+            color: var(--dark-blue);
+            margin-top: 0;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        th {
+            background: var(--dark-blue);
+            color: var(--white);
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        tr:hover {
+            background: var(--gray-100);
+        }
+
+        tr:nth-child(even) {
+            background: var(--gray-100);
+        }
+
+        /* Lists */
+        ul, ol {
+            margin: 1rem 0 1rem 2rem;
+        }
+
+        li {
+            margin-bottom: 0.75rem;
+        }
+
+        /* Highlight boxes */
+        .highlight-box {
+            background: var(--gray-100);
+            border-left: 5px solid var(--orange);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .warning-box {
+            background: #fff5f5;
+            border-left: 5px solid #fc8181;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .tip-box {
+            background: #f0fff4;
+            border-left: 5px solid #68d391;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .quote {
+            font-style: italic;
+            color: var(--gray-600);
+            border-left: 4px solid var(--orange);
+            padding-left: 1.5rem;
+            margin: 2rem 0;
+            font-size: 1.1rem;
+        }
+
+        .quote-author {
+            text-align: right;
+            color: var(--medium-blue);
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+
+        /* Images */
+        .image-container {
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .image-caption {
+            font-size: 0.9rem;
+            color: var(--gray-600);
+            margin-top: 0.5rem;
+            font-style: italic;
+        }
+
+        /* Challenge Section */
+        .challenge-box {
+            background: linear-gradient(135deg, var(--orange) 0%, #dd6b20 100%);
+            color: var(--white);
+            padding: 2.5rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+        }
+
+        .challenge-box h3 {
+            color: var(--white);
+            margin-top: 0;
+            font-size: 1.8rem;
+        }
+
+        .challenge-box ul {
+            color: var(--white);
+        }
+
+        /* Quiz Section */
+        .quiz-container {
+            background: var(--gray-100);
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+        }
+
+        .quiz-question {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .question-text {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--dark-blue);
+            margin-bottom: 1.5rem;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .option {
+            background: var(--white);
+            border: 3px solid var(--gray-200);
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+        }
+
+        .option:hover {
+            border-color: var(--light-blue);
+            background: var(--gray-100);
+            transform: translateX(5px);
+        }
+
+        .option.selected-correct {
+            background: #c6f6d5;
+            border-color: #48bb78;
+            color: #22543d;
+        }
+
+        .option.selected-incorrect {
+            background: #fed7d7;
+            border-color: #f56565;
+            color: #742a2a;
+        }
+
+        .feedback {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 8px;
+            font-weight: 600;
+            display: none;
+        }
+
+        .feedback.correct {
+            background: #c6f6d5;
+            color: #22543d;
+            display: block;
+        }
+
+        .feedback.incorrect {
+            background: #fed7d7;
+            color: #742a2a;
+            display: block;
+        }
+
+        .next-btn, .start-quiz-btn {
+            background: var(--orange);
+            color: var(--white);
+            border: none;
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            margin-top: 1.5rem;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        .next-btn:hover, .start-quiz-btn:hover {
+            background: #dd6b20;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(237, 137, 54, 0.4);
+        }
+
+        .score-display {
+            background: var(--dark-blue);
+            color: var(--white);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 1.3rem;
+        }
+
+        .quiz-complete {
+            text-align: center;
+            padding: 3rem;
+            background: var(--white);
+            border-radius: 12px;
+            display: none;
+        }
+
+        .quiz-complete.show {
+            display: block;
+        }
+
+        .final-score {
+            font-size: 3rem;
+            color: var(--orange);
+            font-weight: 700;
+            margin: 1rem 0;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-blue);
+            color: var(--white);
+            text-align: center;
+            padding: 3rem 0;
+            margin-top: 4rem;
+        }
+
+        .footer-text {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            font-style: italic;
+        }
+
+        .designer {
+            font-weight: 600;
+            color: var(--light-orange);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .brand {
+                font-size: 2.5rem;
+            }
+
+            .subtitle {
+                font-size: 1.3rem;
+            }
+
+            section {
+                padding: 2rem 1.5rem;
+            }
+
+            h2 {
+                font-size: 1.8rem;
+            }
+
+            .cards-container {
+                grid-template-columns: 1fr;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        section {
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        /* Badge */
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin: 0.25rem;
+        }
+
+        .badge-blue {
+            background: var(--light-blue);
+            color: var(--white);
+        }
+
+        .badge-orange {
+            background: var(--orange);
+            color: var(--white);
+        }
+
+        .badge-gray {
+            background: var(--gray-600);
+            color: var(--white);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 class="brand">Bucle Creativo</h1>
+            <h2 class="subtitle">Capítulo 3: Entidades y Atributos</h2>
+            <p class="chapter-info">Los protagonistas de tu historia</p>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="#objetivo"><i class="fas fa-bullseye"></i> Objetivo</a></li>
+                <li><a href="#activacion"><i class="fas fa-lightbulb"></i> Activación</a></li>
+                <li><a href="#desarrollo"><i class="fas fa-book-open"></i> Desarrollo</a></li>
+                <li><a href="#reto"><i class="fas fa-trophy"></i> Reto</a></li>
+                <li><a href="#evaluacion"><i class="fas fa-gamepad"></i> Evaluación</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <!-- Objective Section -->
+        <section id="objetivo">
+            <h2><i class="fas fa-bullseye"></i> Objetivo de Aprendizaje</h2>
+            <div class="objective-box">
+                <h3><i class="fas fa-star"></i> ¿Qué lograrás?</h3>
+                <p>
+                    <strong>Identificar, clasificar y documentar</strong> las entidades principales y sus atributos de un sistema de base de datos real, aplicando criterios de modelado conceptual que integren el pensamiento lógico-analítico para distinguir entre entidades fuertes y débiles, definiendo dominios válidos que garanticen la integridad de los datos, y desarrollando una mentalidad arquitectónica que te permita visualizar tu negocio como un ecosistema de protagonistas conectados, fomentando la curiosidad intelectual, la precisión técnica y la colaboración en la construcción de soluciones de datos sólidas y escalables.
+                </p>
+            </div>
+        </section>
+
+        <!-- Activation Section -->
+        <section id="activacion">
+            <h2><i class="fas fa-lightbulb"></i> Activación: Del Papel a los Planos</h2>
+            
+            <div class="quote">
+                "No hay viento favorable para el navegante que no sabe a qué puerto se dirige."
+                <div class="quote-author">— Séneca</div>
+            </div>
+
+            <p>
+                Imagina por un momento que eres el arquitecto de un edificio. Antes de colocar el primer ladrillo, antes de mezclar el cemento, necesitas algo fundamental: <strong>los planos</strong>. No empiezas construyendo paredes al azar. Primero piensas en las habitaciones, en cómo se conectarán, en quiénes vivirán allí y qué necesitarán.
+            </p>
+
+            <p>
+                En el capítulo anterior hiciste algo extraordinario: diseñaste en papel las primeras tablas de <strong>"Denim Ecuador"</strong>. Definiste columnas, elegiste tipos de datos y pensaste cómo organizar la información. Fue tu primer paso como arquitecto de datos.
+            </p>
+
+            <div class="image-container">
+                <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=800&h=400&fit=crop" alt="Arquitecto diseñando planos">
+                <p class="image-caption">Todo gran proyecto comienza con un buen diseño conceptual</p>
+            </div>
+
+            <p>
+                Pero ahora vamos a dar un salto conceptual. Hasta ahora hemos hablado de <strong>tablas, filas y columnas</strong>. Esas son palabras del mundo <em>físico</em> de las bases de datos, la forma en que la información se guarda en la computadora. Pero antes de llegar a lo físico, necesitamos pasar por lo <strong>conceptual</strong>. Necesitamos pensar en los <strong>protagonistas</strong> de nuestra historia.
+            </p>
+
+            <p>
+                Piensa en esto: cuando escribes una novela, primero piensas en los <strong>personajes</strong> (sustantivos) y en sus <strong>características</strong> (adjetivos). No empiezas escribiendo capítulos. Primero sabes quién es tu protagonista, qué lo motiva, qué lo hace único. Solo entonces puedes contar su historia.
+            </p>
+
+            <div class="highlight-box">
+                <strong><i class="fas fa-brain"></i> Reflexión inicial:</strong> ¿Alguna vez has intentado organizar algo sin primero entender quiénes son los protagonistas? ¿Qué pasó? En el mundo de las bases de datos, saltarse este paso es como intentar cocinar sin saber qué ingredientes tienes. El resultado... bueno, ya te lo imaginas.
+            </div>
+        </section>
+
+        <!-- Development Section -->
+        <section id="desarrollo">
+            <h2><i class="fas fa-book-open"></i> Desarrollo de la Actividad</h2>
+
+            <h3>3.1. ¿Qué es una Entidad? (Clientes, Jeans, Proveedores, Pedidos)</h3>
+
+            <h4>La analogía de la obra de teatro</h4>
+            <p>
+                Imagina que "Denim Ecuador" es una obra de teatro. Para que la obra tenga sentido, necesitas personajes. No puedes tener una historia sin protagonistas, antagonistas, personajes secundarios. Cada uno tiene un rol, una identidad, una razón de ser.
+            </p>
+
+            <p>
+                En tu base de datos pasa exactamente lo mismo. Las <strong>entidades</strong> son los personajes de tu historia. Son las "cosas" sobre las que quieres guardar información.
+            </p>
+
+            <div class="highlight-box">
+                <strong><i class="fas fa-info-circle"></i> Definición clave:</strong> Una entidad es cualquier objeto, persona, lugar o concepto del mundo real sobre el cual necesitas almacenar información en tu base de datos.
+            </div>
+
+            <h4>¿Cómo identificar las entidades?</h4>
+            <p>Hay un truco muy sencillo: <strong>busca los sustantivos</strong>.</p>
+
+            <p>
+                Cuando María te cuenta cómo funciona "Denim Ecuador", escucha con atención los sustantivos que menciona:
+            </p>
+
+            <p class="quote">
+                "Necesito registrar a los <strong>clientes</strong>, saber qué <strong>jeans</strong> tenemos en bodega, anotar los <strong>pedidos</strong> que hacen, guardar los datos de los <strong>proveedores</strong> que nos surten, y llevar un control de las <strong>categorías</strong> de jeans que vendemos."
+            </p>
+
+            <p>¿Ves los sustantivos resaltados? Cada uno de ellos es una <strong>entidad potencial</strong>:</p>
+
+            <ol>
+                <li><strong>Clientes</strong></li>
+                <li><strong>Jeans</strong></li>
+                <li><strong>Pedidos</strong></li>
+                <li><strong>Proveedores</strong></li>
+                <li><strong>Categorías</strong></li>
+            </ol>
+
+            <h4>Los tres tipos de entidades</h4>
+            <p>No todas las entidades son iguales. En el mundo real, podemos clasificarlas en tres grandes grupos:</p>
+
+            <div class="cards-container">
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-cube"></i></div>
+                    <h4>1. Entidades Tangibles</h4>
+                    <p>Cosas que puedes tocar - objetos físicos, personas, lugares.</p>
+                    <ul>
+                        <li><strong>Clientes:</strong> Personas reales con cédula, nombre y teléfono</li>
+                        <li><strong>Jeans:</strong> Prendas físicas con modelo, talla y color</li>
+                        <li><strong>Proveedores:</strong> Empresas reales con RUC y dirección</li>
+                        <li><strong>Bodegas:</strong> Lugares físicos donde guardas el inventario</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-cloud"></i></div>
+                    <h4>2. Entidades Intangibles</h4>
+                    <p>Conceptos que no puedes tocar - ideas, eventos, transacciones.</p>
+                    <ul>
+                        <li><strong>Pedidos:</strong> Una venta realizada (es un evento)</li>
+                        <li><strong>Pagos:</strong> Una transacción económica</li>
+                        <li><strong>Facturas:</strong> Un documento legal (concepto abstracto)</li>
+                        <li><strong>Categorías:</strong> "Skinny", "Recto", "Slim" (conceptos)</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-list"></i></div>
+                    <h4>3. Entidades de Referencia</h4>
+                    <p>Listas de valores para clasificar o estandarizar información.</p>
+                    <ul>
+                        <li><strong>Ciudades:</strong> Quito, Guayaquil, Cuenca, Ambato...</li>
+                        <li><strong>Colores:</strong> Azul, Negro, Gris, Rojo...</li>
+                        <li><strong>Estados de pedido:</strong> Pendiente, Enviado, Entregado...</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="tip-box">
+                <strong><i class="fas fa-lightbulb"></i> La pregunta clave:</strong> ¿Necesito guardar múltiples datos sobre esta "cosa"? ¿O es solo un dato de otra cosa?
+                <ul style="margin-top: 1rem;">
+                    <li><strong>"Cliente":</strong> Necesito guardar cédula, nombre, teléfono, email, ciudad... → <span class="badge badge-blue">Es una entidad</span></li>
+                    <li><strong>"Teléfono":</strong> Solo es un dato del cliente → <span class="badge badge-gray">Es un atributo</span></li>
+                </ul>
+            </div>
+
+            <h4>Las entidades de "Denim Ecuador"</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Entidad</th>
+                        <th>Tipo</th>
+                        <th>¿Por qué es una entidad?</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Cliente</strong></td>
+                        <td><span class="badge badge-blue">Tangible</span></td>
+                        <td>Persona real con múltiples datos (cédula, nombre, teléfono, etc.)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Jean</strong></td>
+                        <td><span class="badge badge-blue">Tangible</span></td>
+                        <td>Prenda física con modelo, talla, color, precio, stock</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Pedido</strong></td>
+                        <td><span class="badge badge-orange">Intangible</span></td>
+                        <td>Evento de venta con fecha, cliente, estado, total</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Detalle_Pedido</strong></td>
+                        <td><span class="badge badge-orange">Intangible</span></td>
+                        <td>Relación entre un pedido y los jeans específicos que contiene</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Proveedor</strong></td>
+                        <td><span class="badge badge-blue">Tangible</span></td>
+                        <td>Empresa que nos surte, con RUC, dirección, contacto</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Categoría</strong></td>
+                        <td><span class="badge badge-gray">Referencia</span></td>
+                        <td>Clasificación de jeans (Skinny, Recto, Slim, Bootcut)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ciudad</strong></td>
+                        <td><span class="badge badge-gray">Referencia</span></td>
+                        <td>Lista de ciudades con su provincia</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="warning-box">
+                <strong><i class="fas fa-exclamation-triangle"></i> Error común:</strong> Crear una entidad para cada dato.
+                <ul style="margin-top: 0.5rem;">
+                    <li>❌ <strong>Mal diseño:</strong> Entidad "Nombre", Entidad "Teléfono", Entidad "Dirección"</li>
+                    <li>✅ <strong>Buen diseño:</strong> Entidad "Cliente" con atributos: nombre, teléfono, dirección</li>
+                </ul>
+                <p style="margin-top: 0.5rem;"><strong>La regla:</strong> Si un dato no tiene sentido por sí solo, no es una entidad.</p>
+            </div>
+
+            <h3>3.2. Atributos y Dominios: Poniendo reglas</h3>
+
+            <h4>Los adjetivos de tus protagonistas</h4>
+            <p>
+                Si las entidades son los sustantivos, los <strong>atributos</strong> son los adjetivos. Son las características que describen a cada entidad.
+            </p>
+
+            <div class="highlight-box">
+                <strong>Definición:</strong> Un atributo es cada una de las propiedades o características que describen a una entidad.
+            </div>
+
+            <p>
+                Piensa en la entidad <strong>Cliente</strong>. ¿Cómo es un cliente? ¿Qué lo describe?
+            </p>
+
+            <ul>
+                <li>Tiene una <strong>cédula</strong> (de 10 dígitos)</li>
+                <li>Tiene un <strong>nombre</strong> (de hasta 100 caracteres)</li>
+                <li>Tiene un <strong>teléfono</strong> (de 10 dígitos, empieza con 09)</li>
+                <li>Tiene un <strong>email</strong> (con formato de correo)</li>
+                <li>Tiene una <strong>ciudad</strong> (de una lista predefinida)</li>
+                <li>Tiene una <strong>fecha de registro</strong></li>
+                <li>Puede estar <strong>activo o inactivo</strong></li>
+            </ul>
+
+            <h4>Los tipos de atributos</h4>
+            <p>No todos los atributos son iguales. Podemos clasificarlos en varios tipos:</p>
+
+            <div class="cards-container">
+                <div class="card">
+                    <h4><i class="fas fa-atom"></i> 1. Atributos Simples</h4>
+                    <p>No se pueden dividir en partes más pequeñas con significado.</p>
+                    <ul>
+                        <li><strong>nombre:</strong> "Juan Pérez"</li>
+                        <li><strong>cedula:</strong> "1712345678"</li>
+                        <li><strong>telefono:</strong> "0999123456"</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4><i class="fas fa-object-group"></i> 2. Atributos Compuestos</h4>
+                    <p>Se pueden dividir en partes más pequeñas.</p>
+                    <ul>
+                        <li><strong>direccion:</strong> calle, número, entre calles</li>
+                        <li><strong>nombre_completo:</strong> nombre y apellido</li>
+                        <li><strong>telefono:</strong> código de país y número</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4><i class="fas fa-calculator"></i> 3. Atributos Derivables</h4>
+                    <p>Se pueden calcular a partir de otros atributos.</p>
+                    <ul>
+                        <li><strong>edad:</strong> de fecha_nacimiento</li>
+                        <li><strong>total_pedido:</strong> suma de subtotales</li>
+                        <li><strong>stock_disponible:</strong> stock inicial - ventas</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4><i class="fas fa-layer-group"></i> 4. Atributos Multivaluados</h4>
+                    <p>Pueden tener múltiples valores al mismo tiempo.</p>
+                    <ul>
+                        <li><strong>telefonos:</strong> celular, casa, oficina</li>
+                        <li><strong>hobbies:</strong> varios pasatiempos</li>
+                        <li><strong>idiomas:</strong> varios idiomas</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="warning-box">
+                <strong><i class="fas fa-exclamation-circle"></i> Advertencia importante:</strong> En general, <strong>no debes guardar atributos derivables</strong>. Si guardas la edad, cada año tendrás que actualizarla. Es mejor calcularlos cuando los necesites.
+            </div>
+
+            <h4>Los dominios: poniendo reglas</h4>
+            <p>
+                Aquí viene uno de los conceptos más poderosos del modelado de datos: los <strong>dominios</strong>.
+            </p>
+
+            <div class="highlight-box">
+                <strong>Definición:</strong> Un dominio es el conjunto de valores válidos que puede tomar un atributo.
+            </div>
+
+            <p>
+                Piensa en el dominio como las <strong>reglas del juego</strong>. Si defines bien los dominios, el sistema te ayudará a evitar errores antes de que ocurran.
+            </p>
+
+            <h4>Ejemplos de dominios en "Denim Ecuador"</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Atributo</th>
+                        <th>Dominio (valores válidos)</th>
+                        <th>Ejemplo válido</th>
+                        <th>Ejemplo inválido</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>cedula</strong></td>
+                        <td>10 dígitos numéricos</td>
+                        <td>"1712345678"</td>
+                        <td>"123", "ABC1234567"</td>
+                    </tr>
+                    <tr>
+                        <td><strong>telefono</strong></td>
+                        <td>10 dígitos, empieza con 09</td>
+                        <td>"0999123456"</td>
+                        <td>"1234567", "0999-abc"</td>
+                    </tr>
+                    <tr>
+                        <td><strong>email</strong></td>
+                        <td>Formato usuario@dominio.ext</td>
+                        <td>"juan@mail.com"</td>
+                        <td>"juan", "@mail.com"</td>
+                    </tr>
+                    <tr>
+                        <td><strong>talla</strong></td>
+                        <td>{28, 30, 32, 34, 36, 38}</td>
+                        <td>32</td>
+                        <td>33, "XL", "grande"</td>
+                    </tr>
+                    <tr>
+                        <td><strong>color</strong></td>
+                        <td>{Azul, Negro, Gris, Rojo, Blanco}</td>
+                        <td>"Azul"</td>
+                        <td>"Verde", "colorido"</td>
+                    </tr>
+                    <tr>
+                        <td><strong>precio</strong></td>
+                        <td>Número decimal positivo</td>
+                        <td>45.00</td>
+                        <td>-10, "gratis", "caro"</td>
+                    </tr>
+                    <tr>
+                        <td><strong>estado_pedido</strong></td>
+                        <td>{Pendiente, Enviado, Entregado, Cancelado}</td>
+                        <td>"Enviado"</td>
+                        <td>"En camino", "casi"</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="tip-box">
+                <strong><i class="fas fa-lightbulb"></i> ¿Por qué son importantes los dominios?</strong>
+                <p style="margin-top: 0.5rem;">
+                    Si no defines el dominio de talla, alguien podría escribir: "32", "32/34", "treinta y dos", "XL", "Grande", "32 " (con espacio). ¡Seis formas diferentes de decir lo mismo! Pero si defines el dominio como {28, 30, 32, 34, 36, 38}, el sistema <strong>rechazará</strong> cualquier valor que no esté en esa lista.
+                </p>
+            </div>
+
+            <h3>3.3. Entidades débiles y fuertes: Dependiendo de tu proveedor, ¿existes?</h3>
+
+            <p>
+                Este es uno de los conceptos más elegantes del modelado de datos. Y para entenderlo, vamos a usar una analogía muy humana.
+            </p>
+
+            <h4>La analogía de la familia</h4>
+            <p>Piensa en esto:</p>
+
+            <ul>
+                <li><strong>Tú</strong> eres una persona. Tienes cédula, nombre, fecha de nacimiento. Existes por ti mismo. No necesitas que nadie más exista para que tú existas. Eres una <strong>entidad fuerte</strong>.</li>
+                <li><strong>Tu hijo menor de edad</strong> también es una persona. Tiene nombre, fecha de nacimiento. Pero en el registro civil, su existencia legal está ligada a la tuya. Él, en el contexto de tu registro familiar, es una <strong>entidad débil</strong>.</li>
+            </ul>
+
+            <div class="highlight-box">
+                <strong>Entidad fuerte:</strong> Aquella que puede existir de forma independiente, sin necesidad de otra entidad.<br><br>
+                <strong>Entidad débil:</strong> Aquella que no puede existir sin la presencia de otra entidad (llamada entidad propietaria).
+            </div>
+
+            <h4>Identificando entidades fuertes</h4>
+            <p>Una entidad es <strong>fuerza</strong> si:</p>
+            <ol>
+                <li>Tiene una identidad propia</li>
+                <li>Puede existir sin otras entidades</li>
+                <li>Tiene un identificador único por sí misma (llave primaria)</li>
+            </ol>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Entidad Fuerte</th>
+                        <th>¿Por qué es fuerte?</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Cliente</strong></td>
+                        <td>Existe aunque nunca haya hecho un pedido. Tiene su propia cédula.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Jean</strong></td>
+                        <td>Existe en el catálogo aunque nunca se haya vendido. Tiene su propio código.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Proveedor</strong></td>
+                        <td>Existe aunque no le hayamos comprado nada. Tiene su propio RUC.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ciudad</strong></td>
+                        <td>Existe aunque no tengamos clientes ahí. Tiene su propio nombre.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4>Identificando entidades débiles</h4>
+            <p>Una entidad es <strong>débil</strong> si:</p>
+            <ol>
+                <li>No tiene sentido sin otra entidad</li>
+                <li>Su identificador único depende de otra entidad</li>
+                <li>Si borras la entidad propietaria, ella también desaparece</li>
+            </ol>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Entidad Débil</th>
+                        <th>Entidad Propietaria</th>
+                        <th>¿Por qué es débil?</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Detalle_Pedido</strong></td>
+                        <td>Pedido</td>
+                        <td>No existe sin un pedido. Es "el jeans específico dentro de un pedido".</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Telefono_Cliente</strong></td>
+                        <td>Cliente</td>
+                        <td>No existe sin un cliente. Es "un teléfono de un cliente específico".</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Imagen_Jean</strong></td>
+                        <td>Jean</td>
+                        <td>No existe sin un jean. Es "una foto de un jean específico".</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4>El caso especial de Detalle_Pedido</h4>
+            <p>
+                Esta es la entidad débil más importante de "Denim Ecuador", y merece una explicación detallada.
+            </p>
+
+            <p>
+                Imagina que Juan Pérez hace un pedido. Ese pedido tiene 3 jeans:
+            </p>
+
+            <ol>
+                <li>1 Jean Skinny azul talla 32</li>
+                <li>2 Jean Recto negro talla 30</li>
+                <li>1 Jean Slim gris talla 34</li>
+            </ol>
+
+            <p>
+                ¿Dónde guardamos esta información? No en la tabla Pedidos (porque solo guarda datos generales del pedido). No en la tabla Jeans (porque solo guarda datos del catálogo).
+            </p>
+
+            <p>
+                Necesitamos una tabla que diga: <strong>"En el pedido #1001, se compró el jean JN001 en cantidad 1, el jean JN002 en cantidad 2, y el jean JN003 en cantidad 1"</strong>.
+            </p>
+
+            <p>
+                Esa tabla es <strong>Detalle_Pedido</strong>. Y es débil porque:
+            </p>
+
+            <ol>
+                <li>No tiene sentido sin un pedido</li>
+                <li>Su identificador único es la combinación de <strong>pedido_id</strong> + <strong>jean_id</strong></li>
+                <li>Si borras el pedido, todos sus detalles se borran</li>
+            </ol>
+
+            <div class="tip-box">
+                <strong><i class="fas fa-question-circle"></i> ¿Cómo reconocer una entidad débil?</strong>
+                <p style="margin-top: 0.5rem;">Hazte estas preguntas:</p>
+                <ol style="margin-top: 0.5rem;">
+                    <li>¿Esta entidad puede existir sin otra? Si NO → es débil</li>
+                    <li>¿Su identificador único incluye el identificador de otra entidad? Si SÍ → es débil</li>
+                    <li>¿Si borro la entidad propietaria, esta también desaparece? Si SÍ → es débil</li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- Challenge Section -->
+        <section id="reto">
+            <h2><i class="fas fa-trophy"></i> Reto: Manos a la Obra</h2>
+            
+            <div class="challenge-box">
+                <h3><i class="fas fa-clipboard-list"></i> Clasificando las entidades de "Denim Ecuador"</h3>
+                <p>
+                    Ha llegado el momento de aplicar todo lo que aprendiste. En esta actividad, vas a crear un <strong>catálogo visual de entidades</strong> usando tarjetas de papel (o un documento digital). Este será tu primer "modelo conceptual" formal.
+                </p>
+            </div>
+
+            <h4>Objetivo</h4>
+            <p>
+                Identificar, clasificar y documentar todas las entidades de "Denim Ecuador", definiendo sus atributos, dominios y relaciones de dependencia.
+            </p>
+
+            <h4>Materiales necesarios</h4>
+            <ul>
+                <li>10 tarjetas de papel (pueden ser post-its o cartulina cortada)</li>
+                <li>Marcadores de colores</li>
+                <li>Lápiz y borrador</li>
+                <li>45 minutos de tu tiempo</li>
+            </ul>
+
+            <h4>Paso a paso</h4>
+
+            <h4>Paso 1: Prepara tus tarjetas</h4>
+            <p>
+                Cada tarjeta representará una entidad. En la parte superior, escribe el <strong>nombre de la entidad</strong>. Debajo, dejarás espacio para los atributos.
+            </p>
+
+            <h4>Paso 2: Identifica las entidades</h4>
+            <p>
+                Basándote en lo que sabes de "Denim Ecuador", escribe estas entidades en tus tarjetas:
+            </p>
+            <ol>
+                <li>CLIENTE</li>
+                <li>JEAN</li>
+                <li>PEDIDO</li>
+                <li>DETALLE_PEDIDO</li>
+                <li>PROVEEDOR</li>
+                <li>CATEGORIA</li>
+                <li>CIUDAD</li>
+                <li>TELEFONO_CLIENTE (entidad auxiliar para teléfonos múltiples)</li>
+                <li>IMAGEN_JEAN (entidad auxiliar para fotos múltiples)</li>
+            </ol>
+
+            <h4>Paso 3: Define los atributos de cada entidad</h4>
+            <p>En cada tarjeta, escribe los atributos principales. Usa esta plantilla:</p>
+
+            <div class="highlight-box">
+                <strong>CLIENTE</strong><br><br>
+                • cliente_id (INTEGER, único)<br>
+                • cedula (VARCHAR(10), único, obligatorio)<br>
+                • nombre (VARCHAR(100), obligatorio)<br>
+                • email (VARCHAR(100))<br>
+                • fecha_registro (DATE, obligatorio)<br>
+                • activo (BOOLEAN, default TRUE)<br>
+                • ciudad_id (referencia a CIUDAD)
+            </div>
+
+            <h4>Paso 4: Define los dominios</h4>
+            <p>Para cada atributo, escribe entre paréntesis:</p>
+            <ol>
+                <li>El <strong>tipo de dato</strong> (lo que aprendiste en el Capítulo 2)</li>
+                <li>Las <strong>restricciones</strong> (único, obligatorio, valores válidos)</li>
+            </ol>
+
+            <p><strong>Ejemplo:</strong></p>
+            <ul>
+                <li>cedula (VARCHAR(10), UNIQUE, NOT NULL, CHECK: 10 dígitos)</li>
+                <li>talla (SMALLINT, CHECK: IN (28, 30, 32, 34, 36, 38))</li>
+                <li>estado (VARCHAR(20), CHECK: IN ('Pendiente', 'Enviado', 'Entregado', 'Cancelado'))</li>
+            </ul>
+
+            <h4>Paso 5: Clasifica cada entidad</h4>
+            <p>En la esquina superior derecha de cada tarjeta, escribe con un color:</p>
+            <ul>
+                <li><strong>F</strong> si es entidad <strong>Fuerte</strong></li>
+                <li><strong>D</strong> si es entidad <strong>Débil</strong></li>
+                <li>Si es débil, escribe también de quién depende</li>
+            </ul>
+
+            <div class="highlight-box">
+                <strong>Ejemplo:</strong><br><br>
+                <strong>DETALLE_PEDIDO [D] (Depende de PEDIDO)</strong><br><br>
+                • pedido_id (INTEGER, obligatorio)<br>
+                • jean_id (INTEGER, obligatorio)<br>
+                • cantidad (SMALLINT, CHECK: > 0)<br>
+                • precio_unitario (NUMERIC(10,2))<br>
+                • subtotal (NUMERIC(10,2))
+            </div>
+
+            <h4>Paso 6: Define las reglas de negocio</h4>
+            <p>
+                En la parte inferior de cada tarjeta, escribe 2 o 3 <strong>reglas de negocio</strong> importantes. Una regla de negocio es una restricción del mundo real que debe reflejarse en la base de datos.
+            </p>
+
+            <p><strong>Ejemplos para CLIENTE:</strong></p>
+            <ol>
+                <li>"Un cliente no puede tener dos cédulas iguales."</li>
+                <li>"Un cliente no puede ser borrado si tiene pedidos registrados."</li>
+                <li>"El email debe tener formato válido."</li>
+            </ol>
+
+            <p><strong>Ejemplos para JEAN:</strong></p>
+            <ol>
+                <li>"El precio debe ser mayor a 0."</li>
+                <li>"El stock no puede ser negativo."</li>
+                <li>"La talla debe estar en el rango permitido."</li>
+            </ol>
+
+            <p><strong>Ejemplos para PEDIDO:</strong></p>
+            <ol>
+                <li>"Un pedido siempre pertenece a un cliente."</li>
+                <li>"El total del pedido debe ser la suma de sus detalles."</li>
+                <li>"Un pedido cancelado no puede cambiar de estado."</li>
+            </ol>
+
+            <h4>Paso 7: Verifica tu trabajo</h4>
+            <p>Revisa tus tarjetas con estas preguntas:</p>
+            <ol>
+                <li>¿Cada entidad tiene al menos un atributo identificador?</li>
+                <li>¿Las entidades débiles dependen claramente de otra entidad?</li>
+                <li>¿Los dominios están bien definidos?</li>
+                <li>¿Las reglas de negocio son claras?</li>
+            </ol>
+
+            <div class="image-container">
+                <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=800&h=400&fit=crop" alt="Tarjetas de estudio organizadas">
+                <p class="image-caption">Organiza tus ideas visualmente para comprender mejor las relaciones</p>
+            </div>
+        </section>
+
+        <!-- Evaluation Section -->
+        <section id="evaluacion">
+            <h2><i class="fas fa-gamepad"></i> Evaluación Lúdica</h2>
+            
+            <div class="quiz-container">
+                <div class="score-display" id="scoreDisplay" style="display: none;">
+                    <i class="fas fa-chart-line"></i> Puntuación: <span id="currentScore">0</span> de 5
+                </div>
+
+                <div id="quizStart" class="quiz-complete show">
+                    <h3><i class="fas fa-play-circle"></i> ¡Demuestra lo que aprendiste!</h3>
+                    <p style="margin: 1.5rem 0; font-size: 1.1rem;">
+                        Responde 5 preguntas sobre entidades y atributos. Cada respuesta correcta te acerca a dominar el modelado conceptual.
+                    </p>
+                    <button class="start-quiz-btn" onclick="startQuiz()">
+                        <i class="fas fa-play"></i> Comenzar Evaluación
+                    </button>
+                </div>
+
+                <div id="quizContent" style="display: none;">
+                    <!-- Question 1 -->
+                    <div class="quiz-question" id="question1">
+                        <div class="question-text">
+                            <span class="badge badge-orange">Pregunta 1</span><br><br>
+                            ¿Cuál de las siguientes opciones es un ejemplo de <strong>entidad intangible</strong> en "Denim Ecuador"?
+                        </div>
+                        <div class="options">
+                            <div class="option" onclick="selectOption(1, 'a', false)">
+                                <strong>A)</strong> Cliente - Persona real con cédula y nombre
+                            </div>
+                            <div class="option" onclick="selectOption(1, 'b', false)">
+                                <strong>B)</strong> Jean - Prenda física con modelo y talla
+                            </div>
+                            <div class="option" onclick="selectOption(1, 'c', true)">
+                                <strong>C)</strong> Pedido - Evento de venta con fecha y estado
+                            </div>
+                            <div class="option" onclick="selectOption(1, 'd', false)">
+                                <strong>D)</strong> Proveedor - Empresa con RUC y dirección
+                            </div>
+                        </div>
+                        <div class="feedback" id="feedback1"></div>
+                    </div>
+
+                    <!-- Question 2 -->
+                    <div class="quiz-question" id="question2" style="display: none;">
+                        <div class="question-text">
+                            <span class="badge badge-orange">Pregunta 2</span><br><br>
+                            Si un atributo se puede calcular a partir de otros (como la edad a partir de la fecha de nacimiento), ¿qué tipo de atributo es?
+                        </div>
+                        <div class="options">
+                            <div class="option" onclick="selectOption(2, 'a', false)">
+                                <strong>A)</strong> Atributo simple
+                            </div>
+                            <div class="option" onclick="selectOption(2, 'b', false)">
+                                <strong>B)</strong> Atributo compuesto
+                            </div>
+                            <div class="option" onclick="selectOption(2, 'c', false)">
+                                <strong>C)</strong> Atributo multivaluado
+                            </div>
+                            <div class="option" onclick="selectOption(2, 'd', true)">
+                                <strong>D)</strong> Atributo derivable
+                            </div>
+                        </div>
+                        <div class="feedback" id="feedback2"></div>
+                    </div>
+
+                    <!-- Question 3 -->
+                    <div class="quiz-question" id="question3" style="display: none;">
+                        <div class="question-text">
+                            <span class="badge badge-orange">Pregunta 3</span><br><br>
+                            ¿Cuál es el dominio correcto para el atributo <strong>talla</strong> de un jean en "Denim Ecuador"?
+                        </div>
+                        <div class="options">
+                            <div class="option" onclick="selectOption(3, 'a', false)">
+                                <strong>A)</strong> Cualquier número entero positivo
+                            </div>
+                            <div class="option" onclick="selectOption(3, 'b', true)">
+                                <strong>B)</strong> {28, 30, 32, 34, 36, 38}
+                            </div>
+                            <div class="option" onclick="selectOption(3, 'c', false)">
+                                <strong>C)</strong> "S", "M", "L", "XL"
+                            </div>
+                            <div class="option" onclick="selectOption(3, 'd', false)">
+                                <strong>D)</strong> Cualquier texto que describa la talla
+                            </div>
+                        </div>
+                        <div class="feedback" id="feedback3"></div>
+                    </div>
+
+                    <!-- Question 4 -->
+                    <div class="quiz-question" id="question4" style="display: none;">
+                        <div class="question-text">
+                            <span class="badge badge-orange">Pregunta 4</span><br><br>
+                            La entidad <strong>Detalle_Pedido</strong> es una entidad débil porque:
+                        </div>
+                        <div class="options">
+                            <div class="option" onclick="selectOption(4, 'a', false)">
+                                <strong>A)</strong> Tiene su propio identificador único independiente
+                            </div>
+                            <div class="option" onclick="selectOption(4, 'b', false)">
+                                <strong>B)</strong> Es una entidad de referencia como Ciudad
+                            </div>
+                            <div class="option" onclick="selectOption(4, 'c', true)">
+                                <strong>C)</strong> No puede existir sin un Pedido y su identificador depende de pedido_id
+                            </div>
+                            <div class="option" onclick="selectOption(4, 'd', false)">
+                                <strong>D)</strong> Es un atributo multivaluado de Pedido
+                            </div>
+                        </div>
+                        <div class="feedback" id="feedback4"></div>
+                    </div>
+
+                    <!-- Question 5 -->
+                    <div class="quiz-question" id="question5" style="display: none;">
+                        <div class="question-text">
+                            <span class="badge badge-orange">Pregunta 5</span><br><br>
+                            ¿Cuál es el propósito principal de definir <strong>dominios</strong> para los atributos?
+                        </div>
+                        <div class="options">
+                            <div class="option" onclick="selectOption(5, 'a', false)">
+                                <strong>A)</strong> Hacer que la base de datos sea más rápida
+                            </div>
+                            <div class="option" onclick="selectOption(5, 'b', true)">
+                                <strong>B)</strong> Mantener la integridad de los datos definiendo valores válidos
+                            </div>
+                            <div class="option" onclick="selectOption(5, 'c', false)">
+                                <strong>C)</strong> Reducir el espacio de almacenamiento
+                            </div>
+                            <div class="option" onclick="selectOption(5, 'd', false)">
+                                <strong>D)</strong> Facilitar la búsqueda de información
+                            </div>
+                        </div>
+                        <div class="feedback" id="feedback5"></div>
+                    </div>
+
+                    <button class="next-btn" id="nextBtn" onclick="nextQuestion()" style="display: none;">
+                        <i class="fas fa-arrow-right"></i> Siguiente Pregunta
+                    </button>
+                </div>
+
+                <div id="quizComplete" class="quiz-complete">
+                    <i class="fas fa-trophy" style="font-size: 4rem; color: var(--orange); margin-bottom: 1rem;"></i>
+                    <h3>¡Evaluación Completada!</h3>
+                    <div class="final-score" id="finalScore">0/5</div>
+                    <p id="finalMessage" style="font-size: 1.2rem; margin: 1.5rem 0;"></p>
+                    <button class="start-quiz-btn" onclick="restartQuiz()">
+                        <i class="fas fa-redo"></i> Intentar de Nuevo
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Reflection Section -->
+        <section>
+            <h2><i class="fas fa-mirror"></i> Reflexión Final</h2>
+            
+            <p>
+                Si completaste todas las tarjetas del reto, acabas de crear tu primer <strong>modelo conceptual de datos</strong>. Este documento es el plano que cualquier desarrollador en el mundo puede leer para construir tu base de datos.
+            </p>
+
+            <div class="highlight-box">
+                <strong><i class="fas fa-celebration"></i> ¡Celebra tu logro!</strong>
+                <p style="margin-top: 0.5rem;">
+                    Pensaste como un arquitecto de datos. Ya no ves tu base de datos como "tablas con columnas". Ahora ves <strong>protagonistas</strong> con características, reglas y relaciones de dependencia.
+                </p>
+            </div>
+
+            <h4>Resumen del Capítulo 3</h4>
+            <ol>
+                <li><strong>Las entidades</strong> son los "sustantivos" de tu negocio: las personas, objetos, eventos o conceptos sobre los cuales necesitas guardar información.</li>
+                <li><strong>Los atributos</strong> son los "adjetivos" de cada entidad: las características que las describen.</li>
+                <li><strong>Los dominios</strong> son las reglas que limitan qué valores puede tomar un atributo. Son fundamentales para mantener la integridad.</li>
+                <li><strong>Las entidades fuertes</strong> pueden existir por sí mismas (Cliente, Jean, Proveedor).</li>
+                <li><strong>Las entidades débiles</strong> dependen de otra entidad para existir (Detalle_Pedido, Telefono_Cliente).</li>
+                <li><strong>Las reglas de negocio</strong> son restricciones del mundo real que deben reflejarse en la base de datos.</li>
+            </ol>
+
+            <div class="tip-box">
+                <strong><i class="fas fa-forward"></i> Próximo paso:</strong>
+                <p style="margin-top: 0.5rem;">
+                    En el próximo capítulo (Capítulo 4), vamos a tomar estas tarjetas y vamos a <strong>conectarlas</strong> con hilos imaginarios. Vamos a descubrir cómo se relacionan entre sí. Porque una entidad no vive aislada: los clientes hacen pedidos, los pedidos contienen jeans, los jeans vienen de proveedores. <strong>Todo está conectado.</strong>
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p class="footer-text">Taller diseñado con el corazón de un docente y la mente de un programador.</p>
+            <p class="designer">Diseñado por: Edwin Méndez J.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Quiz variables
+        let currentQuestion = 1;
+        let score = 0;
+        let answeredQuestions = {};
+
+        function startQuiz() {
+            document.getElementById('quizStart').style.display = 'none';
+            document.getElementById('quizContent').style.display = 'block';
+            document.getElementById('scoreDisplay').style.display = 'block';
+            document.getElementById('question1').style.display = 'block';
+        }
+
+        function selectOption(questionNum, option, isCorrect) {
+            // Prevent answering twice
+            if (answeredQuestions[questionNum]) return;
+            answeredQuestions[questionNum] = true;
+
+            const questionDiv = document.getElementById(`question${questionNum}`);
+            const options = questionDiv.querySelectorAll('.option');
+            const feedback = document.getElementById(`feedback${questionNum}`);
+            const nextBtn = document.getElementById('nextBtn');
+
+            // Disable all options
+            options.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+                opt.style.opacity = '0.7';
+            });
+
+            // Highlight selected option
+            const selectedOption = event.target.closest('.option');
+            if (isCorrect) {
+                selectedOption.classList.add('selected-correct');
+                selectedOption.style.opacity = '1';
+                feedback.className = 'feedback correct';
+                feedback.innerHTML = '<i class="fas fa-check-circle"></i> ¡Correcto! ' + getCorrectExplanation(questionNum);
+                score++;
+                document.getElementById('currentScore').textContent = score;
+            } else {
+                selectedOption.classList.add('selected-incorrect');
+                selectedOption.style.opacity = '1';
+                feedback.className = 'feedback incorrect';
+                feedback.innerHTML = '<i class="fas fa-times-circle"></i> Incorrecto. ' + getIncorrectExplanation(questionNum);
+                
+                // Show correct answer
+                options.forEach(opt => {
+                    if (opt.getAttribute('onclick').includes('true')) {
+                        opt.classList.add('selected-correct');
+                        opt.style.opacity = '1';
+                    }
+                });
+            }
+
+            feedback.style.display = 'block';
+            
+            // Show next button or complete quiz
+            if (questionNum < 5) {
+                nextBtn.style.display = 'inline-block';
+                nextBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            } else {
+                setTimeout(showCompleteQuiz, 2000);
+            }
+        }
+
+        function getCorrectExplanation(num) {
+            const explanations = {
+                1: "Los pedidos son eventos de venta, no objetos físicos tangibles.",
+                2: "Los atributos derivables se calculan a partir de otros atributos y generalmente no deben almacenarse.",
+                3: "El dominio define los valores específicos permitidos: 28, 30, 32, 34, 36, 38.",
+                4: "Detalle_Pedido depende completamente de Pedido y su identificador incluye pedido_id.",
+                5: "Los dominios aseguran que solo se ingresen valores válidos, manteniendo la calidad de los datos."
+            };
+            return explanations[num];
+        }
+
+        function getIncorrectExplanation(num) {
+            const explanations = {
+                1: "Cliente, Jean y Proveedor son entidades tangibles (personas, objetos físicos o empresas reales).",
+                2: "Los atributos derivables se calculan, no se almacenan directamente.",
+                3: "En Denim Ecuador, las tallas están estandarizadas en valores numéricos específicos.",
+                4: "Detalle_Pedido es débil porque no puede existir sin un Pedido padre.",
+                5: "Los dominios definen reglas de validación para mantener la integridad de los datos."
+            };
+            return explanations[num];
+        }
+
+        function nextQuestion() {
+            // Hide current question
+            document.getElementById(`question${currentQuestion}`).style.display = 'none';
+            
+            // Move to next question
+            currentQuestion++;
+            
+            // Show next question
+            if (currentQuestion <= 5) {
+                document.getElementById(`question${currentQuestion}`).style.display = 'block';
+                document.getElementById('nextBtn').style.display = 'none';
+                
+                // Scroll to top of question
+                document.getElementById(`question${currentQuestion}`).scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function showCompleteQuiz() {
+            document.getElementById('quizContent').style.display = 'none';
+            document.getElementById('nextBtn').style.display = 'none';
+            document.getElementById('scoreDisplay').style.display = 'none';
+            document.getElementById('quizComplete').classList.add('show');
+            document.getElementById('finalScore').textContent = `${score}/5`;
+            
+            // Custom message based on score
+            let message = '';
+            if (score === 5) {
+                message = '¡Excelente! 🌟 Dominas completamente los conceptos de entidades y atributos. ¡Estás listo para el siguiente nivel!';
+            } else if (score >= 3) {
+                message = '¡Muy bien! 👍 Tienes una buena comprensión. Repasa los conceptos donde fallaste y estarás perfecto.';
+            } else {
+                message = 'Sigue practicando 💪 Revisa el contenido nuevamente y vuelve a intentarlo. ¡Tú puedes!';
+            }
+            document.getElementById('finalMessage').textContent = message;
+        }
+
+        function restartQuiz() {
+            currentQuestion = 1;
+            score = 0;
+            answeredQuestions = {};
+            
+            // Reset all questions
+            for (let i = 1; i <= 5; i++) {
+                const questionDiv = document.getElementById(`question${i}`);
+                const options = questionDiv.querySelectorAll('.option');
+                const feedback = document.getElementById(`feedback${i}`);
+                
+                options.forEach(opt => {
+                    opt.classList.remove('selected-correct', 'selected-incorrect');
+                    opt.style.pointerEvents = 'auto';
+                    opt.style.opacity = '1';
+                });
+                
+                feedback.className = 'feedback';
+                feedback.style.display = 'none';
+                questionDiv.style.display = 'none';
+            }
+            
+            document.getElementById('quizComplete').classList.remove('show');
+            document.getElementById('quizStart').style.display = 'block';
+            document.getElementById('scoreDisplay').style.display = 'none';
+            document.getElementById('currentScore').textContent = '0';
+        }
+
+        // Smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bucle Creativo - Las Relaciones: Conectando los Puntos</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .brand {
+            font-size: 3em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            animation: fadeInDown 1s ease;
+        }
+
+        .subtitle {
+            font-size: 1.8em;
+            color: #ff6b35;
+            margin-bottom: 20px;
+            animation: fadeInUp 1s ease;
+        }
+
+        .quote {
+            font-style: italic;
+            font-size: 1.1em;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            animation: fadeIn 0.8s ease;
+        }
+
+        .card h2 {
+            color: #1e3c72;
+            font-size: 2em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 4px solid #ff6b35;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card h3 {
+            color: #2a5298;
+            font-size: 1.5em;
+            margin: 25px 0 15px 0;
+        }
+
+        .objective-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 10px;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+
+        .activation-box {
+            background: #fff5f0;
+            border-left: 5px solid #ff6b35;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .content-section {
+            margin: 30px 0;
+        }
+
+        .concept-box {
+            background: #f0f7ff;
+            border: 2px solid #2a5298;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .concept-box h4 {
+            color: #1e3c72;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+        }
+
+        .example-box {
+            background: #fff;
+            border: 2px dashed #667eea;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+
+        .example-box strong {
+            color: #ff6b35;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        th {
+            background: #1e3c72;
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        tr:hover {
+            background: #f5f5f5;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #ffeaa7 0%, #ffeaa7 100%);
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .challenge-box {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+        }
+
+        .challenge-box h2 {
+            color: white;
+            border-bottom: 3px solid white;
+        }
+
+        .steps {
+            background: white;
+            color: #2c3e50;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .steps ol {
+            margin-left: 20px;
+        }
+
+        .steps li {
+            margin: 10px 0;
+            font-size: 1.1em;
+        }
+
+        /* Quiz Styles */
+        .quiz-container {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .quiz-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .quiz-header h2 {
+            color: #1e3c72;
+            font-size: 2em;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: #e0e0e0;
+            border-radius: 5px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            transition: width 0.3s ease;
+        }
+
+        .question-container {
+            display: none;
+        }
+
+        .question-container.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .question {
+            font-size: 1.3em;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .option {
+            background: #f8f9fa;
+            border: 2px solid #e0e0e0;
+            padding: 15px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.1em;
+        }
+
+        .option:hover {
+            background: #e3f2fd;
+            border-color: #2a5298;
+            transform: translateX(5px);
+        }
+
+        .option.selected {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .option.correct {
+            background: #4caf50;
+            color: white;
+            border-color: #4caf50;
+        }
+
+        .option.incorrect {
+            background: #f44336;
+            color: white;
+            border-color: #f44336;
+        }
+
+        .feedback {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            font-weight: 600;
+            display: none;
+        }
+
+        .feedback.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .feedback.correct {
+            background: #e8f5e9;
+            color: #2e7d32;
+            border: 2px solid #4caf50;
+        }
+
+        .feedback.incorrect {
+            background: #ffebee;
+            color: #c62828;
+            border: 2px solid #f44336;
+        }
+
+        .next-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.1em;
+            border-radius: 30px;
+            cursor: pointer;
+            margin-top: 20px;
+            display: none;
+            transition: transform 0.3s ease;
+        }
+
+        .next-btn.show {
+            display: inline-block;
+        }
+
+        .next-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .score-display {
+            text-align: center;
+            font-size: 1.5em;
+            margin: 20px 0;
+            color: #1e3c72;
+            font-weight: bold;
+        }
+
+        .final-message {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .final-message.show {
+            display: block;
+            animation: fadeIn 1s ease;
+        }
+
+        .tip-box {
+            background: #fff9e6;
+            border-left: 5px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+
+        .tip-box strong {
+            color: #ff6b35;
+        }
+
+        .image-container {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        footer {
+            background: #1e3c72;
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 50px;
+        }
+
+        .footer-text {
+            font-size: 1.1em;
+            margin: 10px 0;
+        }
+
+        .designer {
+            font-weight: bold;
+            color: #ff6b35;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .brand {
+                font-size: 2em;
+            }
+            
+            .subtitle {
+                font-size: 1.3em;
+            }
+            
+            .card {
+                padding: 20px;
+            }
+            
+            table {
+                font-size: 0.9em;
+            }
+            
+            th, td {
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="brand">Bucle Creativo</div>
+        <div class="subtitle">Capítulo 4: Las Relaciones - Conectando los Puntos</div>
+        <div class="quote">"Ningún hombre es una isla, entero en sí mismo; cada hombre es un fragmento del continente." — John Donne</div>
+    </header>
+
+    <div class="container">
+        <!-- Objetivo de Aprendizaje -->
+        <div class="card">
+            <h2>🎯 Objetivo de Aprendizaje</h2>
+            <div class="objective-box">
+                <p>Identificar y clasificar los diferentes tipos de relaciones entre entidades (Uno a Muchos y Muchos a Muchos) en una base de datos, aplicando el diseño de tablas intermedias para resolver relaciones complejas, mediante el análisis de casos prácticos del mundo real y la construcción de mapas conceptuales físicos, desarrollando competencias técnicas en modelado de datos, pensamiento lógico para la resolución de problemas y actitudes de colaboración y perseverancia ante desafíos técnicos, para crear bases de datos relacionales eficientes que reflejen fielmente las conexiones del mundo real.</p>
+            </div>
+        </div>
+
+        <!-- Activación -->
+        <div class="card">
+            <h2>🌟 Activación: El Mundo Está Hecho de Conexiones</h2>
+            <div class="activation-box">
+                <p>Imagina por un momento tu vida cotidiana. No vives aislado, ¿verdad? Estás conectado con tu familia, tus amigos, tu escuela, las tiendas donde compras, las redes sociales que usas. <strong>Tu vida es una red de relaciones.</strong></p>
+                
+                <p>Ahora piensa en "Denim Ecuador", esa tienda de jeans que hemos estado diseñando. En el capítulo anterior identificaste a los protagonistas: los Clientes, los Jeans, los Pedidos, los Proveedores. Cada uno con sus atributos, sus reglas, su identidad.</p>
+                
+                <p>Pero aquí viene la verdad más importante que vas a aprender: <span class="highlight">las entidades no viven solas</span>. Un Cliente no tiene sentido si nunca hace un Pedido. Un Pedido no tiene sentido si no contiene Jeans. Un Jean no tiene sentido si no viene de un Proveedor. <strong>Todo está conectado.</strong></p>
+                
+                <p>En este capítulo vas a descubrir el arte de conectar los puntos. Vas a ver tu base de datos como una red viva, como un mapa del tesoro donde cada conexión cuenta una historia.</p>
+            </div>
+        </div>
+
+        <!-- Desarrollo de la Actividad -->
+        <div class="card">
+            <h2>📚 Desarrollo: Los Tres Tipos de Relaciones</h2>
+            
+            <div class="content-section">
+                <h3>4.1. Uno a Muchos (1:N): La Relación Más Común</h3>
+                
+                <div class="concept-box">
+                    <h4>La Analogía de la Familia</h4>
+                    <p>Piensa en esto:</p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>Una <strong>madre</strong> puede tener <strong>muchos hijos</strong>.</li>
+                        <li>Pero cada <strong>hijo</strong> tiene <strong>una sola madre</strong> (biológica).</li>
+                    </ul>
+                    <p style="margin-top: 10px;">Esa es una relación <span class="highlight">1:N</span>. Del lado de la madre es "muchos" (muchos hijos). Del lado del hijo es "uno" (una madre).</p>
+                </div>
+
+                <div class="example-box">
+                    <h4>El Ejemplo de "Denim Ecuador"</h4>
+                    <p>En nuestra tienda, la relación 1:N más clara es:</p>
+                    <p><strong>Un Cliente puede hacer muchos Pedidos, pero cada Pedido pertenece a un solo Cliente.</strong></p>
+                    
+                    <p>Imagina a Juan Pérez. Juan ha comprado jeans tres veces este año:</p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>Pedido #1001 el 15 de marzo</li>
+                        <li>Pedido #1025 el 22 de abril</li>
+                        <li>Pedido #1048 el 10 de junio</li>
+                    </ul>
+                    
+                    <p>Juan tiene <strong>muchos pedidos</strong>. Pero si miras el Pedido #1001, ese pedido pertenece a <strong>un solo cliente</strong>: Juan. No puede ser de Juan y de María al mismo tiempo.</p>
+                </div>
+
+                <h4>¿Cómo se ve esto en las tablas?</h4>
+                <p>En la tabla <strong>PEDIDOS</strong> aparece la columna <strong>cliente_id</strong>. Esa columna es el <span class="highlight">puente</span> que conecta el pedido con el cliente. Se llama <strong>clave foránea</strong> (o <em>foreign key</em>).</p>
+
+                <div class="tip-box">
+                    <strong>💡 La Regla del Lado "Muchos":</strong> En una relación 1:N, la clave foránea va en el lado del "muchos". La tabla del lado "muchos" es la que guarda la referencia a la tabla del lado "uno".
+                </div>
+
+                <h4>Más Ejemplos de Relaciones 1:N en "Denim Ecuador"</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Relación</th>
+                            <th>Lado "Uno"</th>
+                            <th>Lado "Muchos"</th>
+                            <th>¿Por qué?</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Cliente → Pedidos</td>
+                            <td>Cliente</td>
+                            <td>Pedidos</td>
+                            <td>Un cliente puede tener muchos pedidos, pero cada pedido es de un solo cliente</td>
+                        </tr>
+                        <tr>
+                            <td>Ciudad → Clientes</td>
+                            <td>Ciudad</td>
+                            <td>Clientes</td>
+                            <td>Una ciudad puede tener muchos clientes, pero cada cliente vive en una ciudad</td>
+                        </tr>
+                        <tr>
+                            <td>Categoría → Jeans</td>
+                            <td>Categoría</td>
+                            <td>Jeans</td>
+                            <td>Una categoría (Skinny) puede tener muchos jeans, pero cada jean es de una categoría</td>
+                        </tr>
+                        <tr>
+                            <td>Proveedor → Jeans</td>
+                            <td>Proveedor</td>
+                            <td>Jeans</td>
+                            <td>Un proveedor puede surtir muchos jeans, pero cada jean viene de un proveedor</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="tip-box">
+                    <strong>💡 Cómo Identificar una Relación 1:N:</strong> Hazte estas dos preguntas:<br>
+                    1. ¿Un elemento de A puede tener varios elementos de B? (Sí)<br>
+                    2. ¿Un elemento de B puede tener varios elementos de A? (No)<br>
+                    Si la respuesta es "Sí" a la primera y "No" a la segunda, tienes una relación 1:N.
+                </div>
+            </div>
+
+            <div class="content-section">
+                <h3>4.2. Muchos a Muchos (N:M): El Dilema Fascinante</h3>
+                
+                <div class="concept-box">
+                    <h4>El Dilema que te Va a Volar la Cabeza</h4>
+                    <p>Ahora viene el tipo de relación más fascinante (y más problemática): <span class="highlight">Muchos a Muchos (N:M)</span>.</p>
+                    
+                    <p>Piensa en esto:</p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>Un <strong>estudiante</strong> puede inscribirse en <strong>muchas materias</strong>.</li>
+                        <li>Una <strong>materia</strong> puede tener <strong>muchos estudiantes</strong>.</li>
+                    </ul>
+                    <p style="margin-top: 10px;">Eso es una relación N:M. <strong>Ambos lados son "muchos".</strong></p>
+                </div>
+
+                <div class="example-box">
+                    <h4>El Dilema de "Denim Ecuador"</h4>
+                    <p>Ahora piensa en nuestra tienda:</p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>Un <strong>Pedido</strong> puede contener <strong>muchos Jeans</strong> diferentes.</li>
+                        <li>Un <strong>Jean</strong> puede aparecer en <strong>muchos Pedidos</strong> diferentes.</li>
+                    </ul>
+                    <p style="margin-top: 10px;">Eso es una relación N:M. Y aquí viene el problema: <strong>¿cómo lo guardamos en las tablas?</strong></p>
+                </div>
+
+                <div class="tip-box">
+                    <strong>❌ El Intento Fallido:</strong> No puedes poner la clave foránea en ambos lados. Las bases de datos relacionales <strong>NO pueden manejar directamente relaciones N:M</strong>. Necesitamos un truco.
+                </div>
+
+                <h4>La Analogía del Salón de Clases</h4>
+                <p>Piensa en esto: En un colegio, un estudiante toma muchas materias y una materia tiene muchos estudiantes. ¿Cómo resuelve el colegio este problema? Con una <strong>matrícula</strong>.</p>
+                
+                <p>La matrícula es el documento que dice: <em>"El estudiante Juan Pérez está inscrito en la materia Matemáticas"</em>. La matrícula es una <span class="highlight">tabla intermedia</span>. No es un estudiante, no es una materia. Es la <strong>relación</strong> entre ambos.</p>
+
+                <h4>La Solución: Crear una Tabla Intermedia</h4>
+                <p>En "Denim Ecuador", la tabla intermedia se llama <strong>DETALLE_PEDIDO</strong>.</p>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>detalle_id</th>
+                            <th>pedido_id</th>
+                            <th>jean_id</th>
+                            <th>cantidad</th>
+                            <th>precio_unitario</th>
+                            <th>subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>1001</td>
+                            <td>JN001</td>
+                            <td>1</td>
+                            <td>45.00</td>
+                            <td>45.00</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>1001</td>
+                            <td>JN002</td>
+                            <td>2</td>
+                            <td>40.00</td>
+                            <td>80.00</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>1001</td>
+                            <td>JN003</td>
+                            <td>1</td>
+                            <td>42.00</td>
+                            <td>42.00</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>1025</td>
+                            <td>JN001</td>
+                            <td>1</td>
+                            <td>45.00</td>
+                            <td>45.00</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="tip-box">
+                    <strong>✨ La Magia de la Tabla Intermedia:</strong><br>
+                    • Un pedido puede tener muchos jeans: El pedido #1001 tiene 3 filas en DETALLE_PEDIDO<br>
+                    • Un jean puede estar en muchos pedidos: El jean JN001 aparece en 2 filas<br>
+                    • Podemos guardar información adicional: cantidad, precio unitario y subtotal
+                </div>
+
+                <div class="concept-box">
+                    <h4>La Regla de Oro de las Relaciones N:M</h4>
+                    <p><strong>Las bases de datos relacionales NO pueden manejar directamente relaciones Muchos a Muchos. Siempre necesitas crear una tabla intermedia</strong> (también llamada tabla de asociación, tabla puente o tabla <em>junction</em>) que convierta la relación N:M en dos relaciones 1:N.</p>
+                </div>
+
+                <h4>Gráficamente:</h4>
+                <p><strong>Antes:</strong> PEDIDO ← N:M → JEAN</p>
+                <p><strong>Después:</strong> PEDIDO ← 1:N → DETALLE_PEDIDO ← N:1 → JEAN</p>
+                <p><strong>¡Magia!</strong> Convertimos una relación imposible en dos relaciones perfectamente manejables.</p>
+            </div>
+
+            <div class="content-section">
+                <h3>4.3. Rompiendo el N:M: La Magia de las Tablas Intermedias</h3>
+                
+                <h4>Las Tres Funciones de una Tabla Intermedia</h4>
+                <div class="concept-box">
+                    <p><strong>1. Conectar las dos entidades:</strong> Su función principal es servir de puente. Tiene dos claves foráneas, una a cada entidad.</p>
+                    <p><strong>2. Guardar atributos de la relación:</strong> Si la relación tiene información propia, la tabla intermedia la guarda.</p>
+                    <p><strong>3. Tener su propio identificador único:</strong> Aunque es una entidad débil, necesita un identificador único para cada fila.</p>
+                </div>
+
+                <div class="tip-box">
+                    <strong>💡 ¿Por qué guardamos el precio_unitario en DETALLE_PEDIDO?</strong><br>
+                    Porque los precios cambian con el tiempo. Si no guardamos el precio en el momento de la venta, cuando el cliente vuelva y quiera ver su pedido histórico, el sistema le mostrará el precio actual (incorrecto). Al guardar el precio_unitario en el momento de la venta, <strong>preservamos la historia</strong>.
+                </div>
+
+                <div class="tip-box">
+                    <strong>⚠️ Error Común:</strong> No conviertas la tabla intermedia en un "basurero". Solo va información que pertenezca a la <strong>relación</strong> entre las dos entidades, NO a las entidades mismas.
+                </div>
+            </div>
+        </div>
+
+        <!-- Reto -->
+        <div class="challenge-box">
+            <h2>🎨 Reto: Manos a la Obra - Conectando los Puntos con Hilos de Lana</h2>
+            <p>Ha llegado el momento de hacer algo mágico. Vas a tomar las tarjetas que hiciste en el Capítulo 3 y las vas a <strong>conectar físicamente</strong> con hilos de lana de colores. Vas a ver tu base de datos como una red viva, como un mapa de conexiones.</p>
+
+            <div class="steps">
+                <h3>Materiales Necesarios:</h3>
+                <ul>
+                    <li>Las tarjetas de entidades que hiciste en el Capítulo 3</li>
+                    <li>3 colores diferentes de lana o hilo (ej: rojo, azul, verde)</li>
+                    <li>Tijeras</li>
+                    <li>Una mesa grande o el suelo</li>
+                    <li>Marcador para escribir en las lanas</li>
+                    <li>45 minutos de tu tiempo</li>
+                </ul>
+
+                <h3>Pasos a Seguir:</h3>
+                <ol>
+                    <li><strong>Prepara tu espacio:</strong> Coloca todas las tarjetas sobre la mesa, distribuidas de forma que haya espacio entre ellas.</li>
+                    
+                    <li><strong>Identifica las relaciones:</strong> Antes de conectar, identifica todas las relaciones entre tus entidades usando la tabla de relaciones 1:N y N:M.</li>
+                    
+                    <li><strong>Corta tus lanas:</strong> Corta varios trozos de lana de diferentes longitudes. Necesitarás al menos 3 lanas rojas (para relaciones 1:N principales), 2 azules (secundarias) y 2 verdes (adicionales).</li>
+                    
+                    <li><strong>Conecta las relaciones 1:N:</strong> Toma una lana roja y conecta CIUDAD con CLIENTE. Escribe en la lana: "CIUDAD ──────[ 1:N ]────── CLIENTE" y "Una ciudad tiene muchos clientes. La clave foránea (ciudad_id) va en CLIENTE".</li>
+                    
+                    <li><strong>Repite para todas las relaciones 1:N:</strong>
+                        <ul>
+                            <li>CLIENTE → PEDIDO</li>
+                            <li>PEDIDO → DETALLE_PEDIDO</li>
+                            <li>JEAN → DETALLE_PEDIDO</li>
+                            <li>PROVEEDOR → JEAN</li>
+                            <li>CATEGORIA → JEAN</li>
+                        </ul>
+                    </li>
+                    
+                    <li><strong>Identifica las tablas intermedias:</strong> Mira tu mapa. Verás que DETALLE_PEDIDO está en el centro, conectando PEDIDO y JEAN. Esa es tu tabla intermedia principal. Márcala con un color especial (círculo dorado). Es la estrella de tu base de datos.</li>
+                    
+                    <li><strong>Verifica tu mapa:</strong>
+                        <ul>
+                            <li>¿Todas las entidades están conectadas?</li>
+                            <li>¿Las relaciones 1:N tienen la clave foránea en el lado correcto?</li>
+                            <li>¿Las relaciones N:M tienen su tabla intermedia?</li>
+                            <li>¿DETALLE_PEDIDO tiene las dos claves foráneas (pedido_id y jean_id)?</li>
+                        </ul>
+                    </li>
+                    
+                    <li><strong>Reflexiona:</strong> Responde en tu cuaderno:
+                        <ul>
+                            <li>¿Cuál es la tabla más importante de tu base de datos?</li>
+                            <li>¿Qué pasaría si borraras DETALLE_PEDIDO?</li>
+                            <li>¿Qué información nueva descubriste al conectar las tarjetas?</li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- Evaluación Lúdica -->
+        <div class="quiz-container">
+            <div class="quiz-header">
+                <h2>🎮 Evaluación Lúdica: Pon a Prueba tus Conocimientos</h2>
+                <p>Demuestra lo que has aprendido sobre las relaciones en bases de datos</p>
+            </div>
+
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar" style="width: 0%"></div>
+            </div>
+
+            <div class="score-display">
+                Puntuación: <span id="score">0</span> / 5
+            </div>
+
+            <!-- Pregunta 1 -->
+            <div class="question-container active" id="question1">
+                <div class="question">1. En una relación Uno a Muchos (1:N), ¿dónde se coloca la clave foránea?</div>
+                <div class="options">
+                    <div class="option" onclick="selectOption(1, 'a')">A) En el lado del "uno"</div>
+                    <div class="option" onclick="selectOption(1, 'b')">B) En el lado del "muchos"</div>
+                    <div class="option" onclick="selectOption(1, 'c')">C) En ambas tablas</div>
+                    <div class="option" onclick="selectOption(1, 'd')">D) En una tabla intermedia</div>
+                </div>
+                <div class="feedback" id="feedback1"></div>
+                <button class="next-btn" id="nextBtn1" onclick="nextQuestion(1)">Siguiente Pregunta →</button>
+            </div>
+
+            <!-- Pregunta 2 -->
+            <div class="question-container" id="question2">
+                <div class="question">2. ¿Por qué necesitamos una tabla intermedia para las relaciones Muchos a Muchos (N:M)?</div>
+                <div class="options">
+                    <div class="option" onclick="selectOption(2, 'a')">A) Para hacer la base de datos más grande</div>
+                    <div class="option" onclick="selectOption(2, 'b')">B) Porque las bases de datos relacionales no pueden manejar directamente relaciones N:M</div>
+                    <div class="option" onclick="selectOption(2, 'c')">C) Para tener más tablas en el sistema</div>
+                    <div class="option" onclick="selectOption(2, 'd')">D) No es necesaria, es opcional</div>
+                </div>
+                <div class="feedback" id="feedback2"></div>
+                <button class="next-btn" id="nextBtn2" onclick="nextQuestion(2)">Siguiente Pregunta →</button>
+            </div>
+
+            <!-- Pregunta 3 -->
+            <div class="question-container" id="question3">
+                <div class="question">3. En "Denim Ecuador", la relación entre Pedido y Jean es:</div>
+                <div class="options">
+                    <div class="option" onclick="selectOption(3, 'a')">A) Uno a Uno (1:1)</div>
+                    <div class="option" onclick="selectOption(3, 'b')">B) Uno a Muchos (1:N)</div>
+                    <div class="option" onclick="selectOption(3, 'c')">C) Muchos a Muchos (N:M)</div>
+                    <div class="option" onclick="selectOption(3, 'd')">D) No hay relación</div>
+                </div>
+                <div class="feedback" id="feedback3"></div>
+                <button class="next-btn" id="nextBtn3" onclick="nextQuestion(3)">Siguiente Pregunta →</button>
+            </div>
+
+            <!-- Pregunta 4 -->
+            <div class="question-container" id="question4">
+                <div class="question">4. ¿Qué información debe guardarse en la tabla intermedia DETALLE_PEDIDO?</div>
+                <div class="options">
+                    <div class="option" onclick="selectOption(4, 'a')">A) Solo las claves foráneas (pedido_id y jean_id)</div>
+                    <div class="option" onclick="selectOption(4, 'b')">B) Las claves foráneas y atributos de la relación como cantidad y precio_unitario</div>
+                    <div class="option" onclick="selectOption(4, 'c')">C) Toda la información del cliente y del jean</div>
+                    <div class="option" onclick="selectOption(4, 'd')">D) Solo el subtotal</div>
+                </div>
+                <div class="feedback" id="feedback4"></div>
+                <button class="next-btn" id="nextBtn4" onclick="nextQuestion(4)">Siguiente Pregunta →</button>
+            </div>
+
+            <!-- Pregunta 5 -->
+            <div class="question-container" id="question5">
+                <div class="question">5. Si un Cliente puede tener muchos Pedidos, pero cada Pedido pertenece a un solo Cliente, ¿qué tipo de relación es?</div>
+                <div class="options">
+                    <div class="option" onclick="selectOption(5, 'a')">A) Muchos a Muchos (N:M)</div>
+                    <div class="option" onclick="selectOption(5, 'b')">B) Uno a Uno (1:1)</div>
+                    <div class="option" onclick="selectOption(5, 'c')">C) Uno a Muchos (1:N)</div>
+                    <div class="option" onclick="selectOption(5, 'd')">D) Ninguna de las anteriores</div>
+                </div>
+                <div class="feedback" id="feedback5"></div>
+                <button class="next-btn" id="nextBtn5" onclick="showFinalResults()">Ver Resultados Finales</button>
+            </div>
+
+            <div class="final-message" id="finalMessage">
+                <h3>¡Felicitaciones! 🎉</h3>
+                <p id="finalScore"></p>
+                <p id="finalText"></p>
+                <p style="margin-top: 20px; font-style: italic;">"Tu base de datos no es un conjunto de tablas aisladas. Es una red de conexiones vivas."</p>
+            </div>
+        </div>
+
+        <!-- Cierre -->
+        <div class="card">
+            <h2>🌈 Cierre del Capítulo: Tu Base de Datos es una Red Viva</h2>
+            <p>Si llegaste hasta aquí y completaste el ejercicio de los hilos de lana, acabas de tener una revelación: <strong>tu base de datos no es un conjunto de tablas aisladas. Es una red de conexiones vivas.</strong></p>
+            
+            <p>Cada hilo de lana que conectaste representa una relación del mundo real. Cada clave foránea es un puente entre dos entidades. Cada tabla intermedia es la solución elegante a un problema complejo.</p>
+
+            <h3>Resumen del Capítulo 4:</h3>
+            <ul style="margin-left: 20px; margin-top: 10px;">
+                <li><strong>Las relaciones</strong> son el corazón de una base de datos relacional. Sin relaciones, solo tienes tablas aisladas sin sentido.</li>
+                <li><strong>Relación 1:N (Uno a Muchos):</strong> Un elemento de A tiene muchos elementos de B, pero un elemento de B solo tiene un elemento de A. La clave foránea va en el lado "muchos".</li>
+                <li><strong>Relación N:M (Muchos a Muchos):</strong> Ambos lados tienen múltiples elementos. Las bases de datos relacionales no pueden manejar esto directamente.</li>
+                <li><strong>Tablas intermedias:</strong> La solución elegante para las relaciones N:M. Convierten una relación N:M en dos relaciones 1:N, y guardan atributos propios de la relación.</li>
+                <li><strong>DETALLE_PEDIDO</strong> es la tabla intermedia principal de "Denim Ecuador", resolviendo la relación N:M entre Pedidos y Jeans.</li>
+            </ul>
+
+            <div class="tip-box" style="margin-top: 20px;">
+                <strong>🚀 Próximo Capítulo:</strong> En el Capítulo 5 vamos a dibujar todo esto en un <strong>Diagrama Entidad-Relación (DER)</strong>. Vas a traducir tus tarjetas y tus hilos de lana a un lenguaje universal que cualquier desarrollador en el mundo puede leer. ¡Tendrás en tus manos el plano oficial de tu base de datos!
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-text">Taller diseñado con el corazón de un docente y la mente de un programador.</div>
+        <div class="footer-text designer">Diseñado por: Edwin Méndez J.</div>
+    </footer>
+
+    <script>
+        let currentScore = 0;
+        let answeredQuestions = 0;
+        const totalQuestions = 5;
+
+        const correctAnswers = {
+            1: 'b',
+            2: 'b',
+            3: 'c',
+            4: 'b',
+            5: 'c'
+        };
+
+        const explanations = {
+            1: '¡Correcto! En una relación 1:N, la clave foránea siempre va en el lado del "muchos". Por ejemplo, en Cliente → Pedidos, la clave foránea (cliente_id) va en la tabla PEDIDOS.',
+            2: '¡Exacto! Las bases de datos relacionales no pueden manejar directamente relaciones Muchos a Muchos. Necesitamos una tabla intermedia que convierta la relación N:M en dos relaciones 1:N.',
+            3: '¡Muy bien! Un Pedido puede contener muchos Jeans diferentes, y un Jean puede aparecer en muchos Pedidos diferentes. Esto es una relación N:M que se resuelve con la tabla intermedia DETALLE_PEDIDO.',
+            4: '¡Perfecto! La tabla intermedia debe tener las dos claves foráneas (pedido_id y jean_id) PARA conectar las entidades, Y TAMBIÉN los atributos de la relación como cantidad y precio_unitario, que son información propia de la relación.',
+            5: '¡Correcto! Un Cliente puede tener muchos Pedidos (lado "muchos"), pero cada Pedido pertenece a un solo Cliente (lado "uno"). Esta es la definición clásica de una relación 1:N.'
+        };
+
+        function selectOption(questionNum, selectedOption) {
+            // Disable all options for this question
+            const options = document.querySelectorAll(`#question${questionNum} .option`);
+            options.forEach(opt => opt.style.pointerEvents = 'none');
+            
+            // Mark selected option
+            options.forEach(opt => {
+                opt.classList.remove('selected');
+                if (opt.getAttribute('onclick').includes(`'${selectedOption}'`)) {
+                    opt.classList.add('selected');
+                }
+            });
+
+            // Check if correct
+            const isCorrect = selectedOption === correctAnswers[questionNum];
+            const feedback = document.getElementById(`feedback${questionNum}`);
+            
+            if (isCorrect) {
+                currentScore++;
+                document.getElementById(`score`).textContent = currentScore;
+                feedback.className = 'feedback correct show';
+                feedback.innerHTML = '✅ ' + explanations[questionNum];
+                
+                // Mark option as correct
+                options.forEach(opt => {
+                    if (opt.getAttribute('onclick').includes(`'${selectedOption}'`)) {
+                        opt.classList.add('correct');
+                    }
+                });
+            } else {
+                feedback.className = 'feedback incorrect show';
+                feedback.innerHTML = '❌ Respuesta incorrecta. ' + explanations[questionNum];
+                
+                // Mark selected as incorrect and show correct one
+                options.forEach(opt => {
+                    if (opt.getAttribute('onclick').includes(`'${selectedOption}'`)) {
+                        opt.classList.add('incorrect');
+                    }
+                    if (opt.getAttribute('onclick').includes(`'${correctAnswers[questionNum]}'`)) {
+                        opt.classList.add('correct');
+                    }
+                });
+            }
+
+            // Show next button
+            document.getElementById(`nextBtn${questionNum}`).classList.add('show');
+            
+            // Update progress bar
+            answeredQuestions++;
+            const progress = (answeredQuestions / totalQuestions) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+        }
+
+        function nextQuestion(currentQuestion) {
+            // Hide current question
+            document.getElementById(`question${currentQuestion}`).classList.remove('active');
+            
+            // Show next question
+            const nextQuestionNum = currentQuestion + 1;
+            document.getElementById(`question${nextQuestionNum}`).classList.add('active');
+        }
+
+        function showFinalResults() {
+            // Hide last question
+            document.getElementById('question5').classList.remove('active');
+            
+            // Show final message
+            const finalMessage = document.getElementById('finalMessage');
+            const finalScore = document.getElementById('finalScore');
+            const finalText = document.getElementById('finalText');
+            
+            finalScore.textContent = `Tu puntuación final: ${currentScore} de ${totalQuestions}`;
+            
+            if (currentScore === 5) {
+                finalText.textContent = '¡Excelente! 🌟 Has dominado completamente el concepto de relaciones en bases de datos. Estás listo para el próximo capítulo.';
+            } else if (currentScore >= 3) {
+                finalText.textContent = '¡Muy bien! 👍 Tienes una buena comprensión de las relaciones. Repasa los conceptos donde tuviste dificultades y estarás perfecto.';
+            } else {
+                finalText.textContent = 'Buen intento 💪 Te recomiendo repasar el capítulo, especialmente las tablas intermedias y las claves foráneas. ¡Tú puedes!';
+            }
+            
+            finalMessage.classList.add('show');
+            
+            // Update progress bar to 100%
+            document.getElementById('progressBar').style.width = '100%';
+        }
+    </script>
+</body>
+</html>
